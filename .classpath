@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="dist/Gestor.jar"/>
+	<classpathentry kind="lib" path="dist/lib/itext-pdfa-5.3.5-javadoc.jar"/>
+	<classpathentry kind="lib" path="dist/lib/itext-pdfa-5.3.5-sources.jar"/>
+	<classpathentry kind="lib" path="dist/lib/itext-pdfa-5.3.5.jar"/>
+	<classpathentry kind="lib" path="dist/lib/itext-xtra-5.3.5-javadoc.jar"/>
+	<classpathentry kind="lib" path="dist/lib/itext-xtra-5.3.5-sources.jar"/>
+	<classpathentry kind="lib" path="dist/lib/itext-xtra-5.3.5.jar"/>
+	<classpathentry kind="lib" path="dist/lib/itextpdf-5.3.5-javadoc.jar"/>
+	<classpathentry kind="lib" path="dist/lib/itextpdf-5.3.5-sources.jar"/>
+	<classpathentry kind="lib" path="dist/lib/itextpdf-5.3.5.jar"/>
+	<classpathentry kind="lib" path="dist/lib/mysql-connector-java-3.0.17-ga-bin.jar"/>
+	<classpathentry kind="lib" path="dist/lib/mysql-connector-java-3.1.14.jar"/>
+	<classpathentry kind="lib" path="dist/lib/mysql-connector-java-5.1.15-bin.jar"/>
+	<classpathentry kind="lib" path="dist/lib/valnif.jar"/>
+	<classpathentry kind="lib" path="Librerias/itext-pdfa-5.3.5-javadoc.jar"/>
+	<classpathentry kind="lib" path="Librerias/itext-pdfa-5.3.5-sources.jar"/>
+	<classpathentry kind="lib" path="Librerias/itext-pdfa-5.3.5.jar"/>
+	<classpathentry kind="lib" path="Librerias/itext-xtra-5.3.5-javadoc.jar"/>
+	<classpathentry kind="lib" path="Librerias/itext-xtra-5.3.5-sources.jar"/>
+	<classpathentry kind="lib" path="Librerias/itext-xtra-5.3.5.jar"/>
+	<classpathentry kind="lib" path="Librerias/itextpdf-5.3.5-javadoc.jar"/>
+	<classpathentry kind="lib" path="Librerias/itextpdf-5.3.5-sources.jar"/>
+	<classpathentry kind="lib" path="Librerias/itextpdf-5.3.5.jar"/>
+	<classpathentry kind="lib" path="Librerias/mysql-connector-java-3.0.17-ga-bin.jar"/>
+	<classpathentry kind="lib" path="Librerias/valnif.jar"/>
+	<classpathentry kind="output" path="build/classes"/>
+</classpath>
