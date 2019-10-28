@@ -19,7 +19,7 @@ public class InicioSesion extends javax.swing.JFrame {
     ResultSet rs;
     Statement st;
     String driver = "com.mysql.jdbc.Driver";
-    String urlMysql = "jdbc:mysql://sencitel.ddns.net:3306/";
+    String urlMysql = "jdbc:mysql://localhost:3306/";
 
     /**
      * Creates new form InicioSesion

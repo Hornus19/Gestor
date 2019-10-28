@@ -23,7 +23,7 @@ public class Busqueda extends javax.swing.JDialog {
     ResultSet rs;
     Statement st;
     String driver = "com.mysql.jdbc.Driver";
-    String urlMysql = "jdbc:mysql://sencitel.ddns.net:3306/";
+    String urlMysql = "jdbc:mysql://localhost:3306/";
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     ;
