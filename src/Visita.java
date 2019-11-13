@@ -8,6 +8,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -138,6 +139,10 @@ public class Visita extends javax.swing.JDialog {
               "Agente",
               "CT Estado"
             }) {
+          /**
+               * 
+               */
+              private static final long serialVersionUID = 1L;
           Class[] types =
               new Class[] {
                 java.lang.String.class,
@@ -1297,7 +1302,7 @@ public class Visita extends javax.swing.JDialog {
       java.awt.event.FocusEvent evt) { // GEN-FIRST:event_txtnuevotlfFocusLost
     if (!txtnuevotlf.getText().equalsIgnoreCase("")) {
       if (validaciones.validar.tlf(txtnuevotlf.getText()) == 1) {
-
+        //
       } else {
         JOptionPane.showMessageDialog(
             null, "El Teléfono no es valido", "Error", JOptionPane.WARNING_MESSAGE);
@@ -1395,40 +1400,40 @@ public class Visita extends javax.swing.JDialog {
                             + "-"
                             + txtnuevodia.getText();
                     String hora = txtnuevohora.getText() + ":" + txtnuevomin.getText();
-                    boolean ok =
-                        st.execute(
-                            "INSERT INTO `visitas` (`distribuidor`, `razonsocial`, `persona`, `telefono`, `direccion`, `fecha`, `codpostal`, `hora`, `estado`"
-                                + ", `venta`, `comisionvisita`, `comisionventa`, `observaciones`, `operador`, `teleoperadora`, `fechafin`) "
-                                + "VALUES ('"
-                                + combonuevodistri.getSelectedItem().toString()
-                                + "', '"
-                                + txtnuevors.getText()
-                                + "', '"
-                                + txtnuevopsc.getText()
-                                + "', "
-                                + "'"
-                                + txtnuevotlf.getText()
-                                + "', '"
-                                + txtnuevodireccion.getText()
-                                + "', '"
-                                + fecha
-                                + "', '"
-                                + txtnuevocp.getText()
-                                + "', "
-                                + "'"
-                                + hora
-                                + "', '"
-                                + combonuevoestado.getSelectedItem().toString()
-                                + "', '-', '0'"
-                                + ", '0', '"
-                                + txtnuevoobser.getText()
-                                + "', '"
-                                + txtnuevoop.getText()
-                                + "', '"
-                                + log
-                                + "', '"
-                                + fechafin
-                                + "');");
+
+                    st.execute(
+                        "INSERT INTO `visitas` (`distribuidor`, `razonsocial`, `persona`, `telefono`, `direccion`, `fecha`, `codpostal`, `hora`, `estado`"
+                            + ", `venta`, `comisionvisita`, `comisionventa`, `observaciones`, `operador`, `teleoperadora`, `fechafin`) "
+                            + "VALUES ('"
+                            + combonuevodistri.getSelectedItem().toString()
+                            + "', '"
+                            + txtnuevors.getText()
+                            + "', '"
+                            + txtnuevopsc.getText()
+                            + "', "
+                            + "'"
+                            + txtnuevotlf.getText()
+                            + "', '"
+                            + txtnuevodireccion.getText()
+                            + "', '"
+                            + fecha
+                            + "', '"
+                            + txtnuevocp.getText()
+                            + "', "
+                            + "'"
+                            + hora
+                            + "', '"
+                            + combonuevoestado.getSelectedItem().toString()
+                            + "', '-', '0'"
+                            + ", '0', '"
+                            + txtnuevoobser.getText()
+                            + "', '"
+                            + txtnuevoop.getText()
+                            + "', '"
+                            + log
+                            + "', '"
+                            + fechafin
+                            + "');");
                     limpiar();
                     bloqueoinicial();
                     cargainicial();
@@ -1489,38 +1494,38 @@ public class Visita extends javax.swing.JDialog {
                         + "-"
                         + txtnuevodia.getText();
                 String hora = txtnuevohora.getText() + ":" + txtnuevomin.getText();
-                boolean ok =
-                    st.execute(
-                        "INSERT INTO `visitas` (`distribuidor`, `razonsocial`, `persona`, `telefono`, `direccion`, `fecha`, `codpostal`, `hora`, `estado`"
-                            + ", `venta`, `comisionvisita`, `comisionventa`, `observaciones`, `operador`, `teleoperadora`, `fechafin`) "
-                            + "VALUES ('"
-                            + combonuevodistri.getSelectedItem().toString()
-                            + "', '"
-                            + txtnuevors.getText()
-                            + "', '"
-                            + txtnuevopsc.getText()
-                            + "', "
-                            + "'"
-                            + txtnuevotlf.getText()
-                            + "', '"
-                            + txtnuevodireccion.getText()
-                            + "', '"
-                            + fecha
-                            + "', '"
-                            + txtnuevocp.getText()
-                            + "', "
-                            + "'"
-                            + hora
-                            + "', '"
-                            + combonuevoestado.getSelectedItem().toString()
-                            + "', '-', '0'"
-                            + ", '0', '"
-                            + txtnuevoobser.getText()
-                            + "', '"
-                            + txtnuevoop.getText()
-                            + "', '-', '"
-                            + fechafin
-                            + "');");
+
+                st.execute(
+                    "INSERT INTO `visitas` (`distribuidor`, `razonsocial`, `persona`, `telefono`, `direccion`, `fecha`, `codpostal`, `hora`, `estado`"
+                        + ", `venta`, `comisionvisita`, `comisionventa`, `observaciones`, `operador`, `teleoperadora`, `fechafin`) "
+                        + "VALUES ('"
+                        + combonuevodistri.getSelectedItem().toString()
+                        + "', '"
+                        + txtnuevors.getText()
+                        + "', '"
+                        + txtnuevopsc.getText()
+                        + "', "
+                        + "'"
+                        + txtnuevotlf.getText()
+                        + "', '"
+                        + txtnuevodireccion.getText()
+                        + "', '"
+                        + fecha
+                        + "', '"
+                        + txtnuevocp.getText()
+                        + "', "
+                        + "'"
+                        + hora
+                        + "', '"
+                        + combonuevoestado.getSelectedItem().toString()
+                        + "', '-', '0'"
+                        + ", '0', '"
+                        + txtnuevoobser.getText()
+                        + "', '"
+                        + txtnuevoop.getText()
+                        + "', '-', '"
+                        + fechafin
+                        + "');");
                 limpiar();
                 bloqueoinicial();
                 cargainicial();

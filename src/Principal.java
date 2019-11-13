@@ -2362,9 +2362,8 @@ public class Principal extends javax.swing.JFrame {
       java.awt.event.ActionEvent evt) { // GEN-FIRST:event_combocomercialesActionPerformed
 
     try {
-      System.out.println(combocomerciales.getSelectedIndex());
       if (combocomerciales.getSelectedIndex() != -1 && combocomerciales.getSelectedIndex() != 0) {
-        System.out.println(combocomerciales.getSelectedIndex() + "entra");
+
         Class.forName(driver).newInstance();
         con = DriverManager.getConnection(urlMysql + "Clientes", "sencitel", "Ludwig1753");
         st = con.createStatement();
@@ -2407,9 +2406,7 @@ public class Principal extends javax.swing.JFrame {
     this.setVisible(false);
     bs.setVisible(true);
     bs.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-    if (txtcargacliente.getText().equalsIgnoreCase("")) {
-
-    } else {
+    if (!txtcargacliente.getText().equalsIgnoreCase("")) {
       this.dispose();
     }
   } // GEN-LAST:event_btnbuscarActionPerformed
@@ -4950,7 +4947,6 @@ public class Principal extends javax.swing.JFrame {
   } // GEN-LAST:event_txtcargaclienteFocusLost
 
   public void cargarcliente(String cod) {
-    System.out.println(cod);
     String codigo = cod;
     txtcargacliente.setEnabled(true);
     txtcargacliente.setText(codigo);

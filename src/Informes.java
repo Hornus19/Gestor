@@ -29,7 +29,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 /** @author David Grande */
 public class Informes {
-
+  static FileOutputStream ficheroPdf = null;
   // Informe semanal x delegación
   public static void informedelegacion(ResultSet rs, String delegacion, String provincia)
       throws SQLException {
@@ -61,8 +61,8 @@ public class Informes {
         celda15 = null,
         celda16 = null;
 
-    FileOutputStream ficheroPdf = null;
     try {
+
       do {
         filas += 1;
       } while (copia.next());
@@ -402,7 +402,6 @@ public class Informes {
         celda22,
         celda23;
 
-    FileOutputStream ficheroPdf = null;
     try {
       do {
         filas += 1;
@@ -577,12 +576,7 @@ public class Informes {
         int n = Integer.parseInt(rs.getString("numportasmovil"));
         int n1 = Integer.parseInt(rs.getString("numaltasmovi"));
         n += n1;
-        String p1,
-            p2,
-            p3,
-            fijo,
-            movil,
-            c1 = "",
+        String c1 = "",
             c2 = "",
             c3 = "",
             c4 = "",
@@ -1047,7 +1041,6 @@ public class Informes {
         celda22,
         celda23;
 
-    FileOutputStream ficheroPdf = null;
     try {
       do {
         filas += 1;
@@ -1224,12 +1217,7 @@ public class Informes {
         int n = Integer.parseInt(rs.getString("numportasmovil"));
         int n1 = Integer.parseInt(rs.getString("numaltasmovi"));
         n += n1;
-        String p1,
-            p2,
-            p3,
-            fijo,
-            movil,
-            c1 = "",
+        String c1 = "",
             c2 = "",
             c3 = "",
             c4 = "",
@@ -1695,7 +1683,6 @@ public class Informes {
         celda22,
         celda23;
 
-    FileOutputStream ficheroPdf = null;
     try {
       do {
         filas += 1;
@@ -1872,12 +1859,7 @@ public class Informes {
         int n = Integer.parseInt(rs.getString("numportasmovil"));
         int n1 = Integer.parseInt(rs.getString("numaltasmovi"));
         n += n1;
-        String p1,
-            p2,
-            p3,
-            fijo,
-            movil,
-            c1 = "",
+        String c1 = "",
             c2 = "",
             c3 = "",
             c4 = "",
@@ -2259,7 +2241,6 @@ public class Informes {
     Font font1 = new Font(Font.FontFamily.TIMES_ROMAN, 14, Element.ALIGN_CENTER); // negrita
     Font font2 = new Font(Font.FontFamily.TIMES_ROMAN, 9); // negrita
 
-    FileOutputStream ficheroPdf = null;
     try {
       do {
 
@@ -2443,28 +2424,7 @@ public class Informes {
     Font font1 = new Font(Font.FontFamily.TIMES_ROMAN, 14, Element.ALIGN_CENTER); // negrita
     Font font2 = new Font(Font.FontFamily.TIMES_ROMAN, 9); // negrita
 
-    FileOutputStream ficheroPdf = null;
-    PdfPCell celda1,
-        celda2,
-        celda3,
-        celda4,
-        celda5,
-        celda6,
-        celda7,
-        celda8,
-        celda9,
-        celda10,
-        celda11,
-        celda12,
-        celda13,
-        celda14,
-        celda15,
-        celda16,
-        celda17,
-        celda18,
-        celda19,
-        celda21,
-        celda22;
+    PdfPCell celda1, celda2, celda3, celda4, celda5, celda6, celda7, celda8, celda9, celda10;
 
     try {
       do {
@@ -2619,28 +2579,7 @@ public class Informes {
     Font font1 = new Font(Font.FontFamily.TIMES_ROMAN, 14, Element.ALIGN_CENTER); // negrita
     Font font2 = new Font(Font.FontFamily.TIMES_ROMAN, 9); // negrita
 
-    FileOutputStream ficheroPdf = null;
-    PdfPCell celda1,
-        celda2,
-        celda3,
-        celda4,
-        celda5,
-        celda6,
-        celda7,
-        celda8,
-        celda9,
-        celda10,
-        celda11,
-        celda12,
-        celda13,
-        celda14,
-        celda15,
-        celda16,
-        celda17,
-        celda18,
-        celda19,
-        celda21,
-        celda22;
+    PdfPCell celda1, celda2, celda3, celda4, celda5, celda6, celda7, celda8, celda10;
 
     try {
       do {
@@ -2789,28 +2728,8 @@ public class Informes {
     Font font1 = new Font(Font.FontFamily.TIMES_ROMAN, 14, Element.ALIGN_CENTER); // negrita
     Font font2 = new Font(Font.FontFamily.TIMES_ROMAN, 9); // negrita
 
-    FileOutputStream ficheroPdf = null;
-    PdfPCell celda1,
-        celda2,
-        celda3,
-        celda4,
-        celda5,
-        celda6,
-        celda7,
-        celda8,
-        celda9,
-        celda10,
-        celda11,
-        celda12,
-        celda13,
-        celda14,
-        celda15,
-        celda16,
-        celda17,
-        celda18,
-        celda19,
-        celda21,
-        celda22;
+    ;
+    PdfPCell celda1, celda2, celda3, celda4, celda5, celda6, celda7, celda8;
 
     try {
       do {

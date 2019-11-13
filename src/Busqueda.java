@@ -606,7 +606,7 @@ public class Busqueda extends javax.swing.JDialog {
   private void btnsalirbusActionPerformed(
       java.awt.event.ActionEvent evt) { // GEN-FIRST:event_btnsalirbusActionPerformed
     this.setVisible(false);
-    Principal ps = new Principal("","");
+    Principal ps = new Principal("", "");
     ps.setVisible(true);
   } // GEN-LAST:event_btnsalirbusActionPerformed
 
@@ -674,20 +674,15 @@ public class Busqueda extends javax.swing.JDialog {
     int mod =
         Integer.parseInt(tablabusqueda.getValueAt(tablabusqueda.getSelectedRow(), 0).toString());
     cargacliente(mod);
-    System.out.println(evt.getClickCount());
     if (evt.getClickCount() < 1) { //
-      
-    } else {
 
-    }
+    } 
   } // GEN-LAST:event_tablabusquedaMouseClicked
 
   public void cargacliente(int mod) {
-    String cod_cliente = String.valueOf(mod);
-    System.out.println(cod_cliente);
-    String blanco = "";
+
     this.dispose();
-    Principal ps = new Principal(blanco, cod_cliente);
+    Principal ps = new Principal("", String.valueOf(mod));
     ps.setVisible(true);
   }
 
