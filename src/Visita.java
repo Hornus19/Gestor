@@ -1301,7 +1301,7 @@ public class Visita extends javax.swing.JDialog {
   private void txtnuevotlfFocusLost(
       java.awt.event.FocusEvent evt) { // GEN-FIRST:event_txtnuevotlfFocusLost
     if (!txtnuevotlf.getText().equalsIgnoreCase("")) {
-      if (validaciones.validar.tlf(txtnuevotlf.getText()) == 1) {
+      if (validaciones.Validar.tlf(txtnuevotlf.getText()) == 1) {
         //
       } else {
         JOptionPane.showMessageDialog(

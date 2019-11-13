@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 import com.aeat.valida.Validador;
 
 /** @author David Grande */
-public class validar {
+public class Validar {
 
   public static int comprobar(String dni) {
     Validador val = new Validador();

@@ -619,7 +619,7 @@ public class Principal extends javax.swing.JFrame {
     txtobservaciones.setRows(5);
     jScrollPane3.setViewportView(txtobservaciones);
 
-    btncomerciales.setText("Comerciales");
+    btncomerciales.setText("Comercial");
     btncomerciales.addActionListener(
         new java.awt.event.ActionListener() {
           public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2392,7 +2392,7 @@ public class Principal extends javax.swing.JFrame {
   private void txtdocumentoFocusLost(
       java.awt.event.FocusEvent evt) { // GEN-FIRST:event_txtdocumentoFocusLost
     txtdocumento.setText(txtdocumento.getText().toUpperCase());
-    int dni = validaciones.validar.comprobar(txtdocumento.getText());
+    int dni = validaciones.Validar.comprobar(txtdocumento.getText());
     if (dni < 0) {
       JOptionPane.showMessageDialog(
           null, "El documentos escrito no es valido", "Error", JOptionPane.WARNING_MESSAGE);
@@ -5962,7 +5962,7 @@ public class Principal extends javax.swing.JFrame {
 
   private void btncomercialesActionPerformed(
       java.awt.event.ActionEvent evt) { // GEN-FIRST:event_btncomercialesActionPerformed
-    Comerciales cm = new Comerciales();
+    Comercial cm = new Comercial();
     cm.setVisible(true);
     cm.setLocationRelativeTo(null);
     cm.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);

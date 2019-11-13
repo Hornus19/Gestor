@@ -25,6 +25,7 @@ public class Busqueda extends javax.swing.JDialog {
    * @author David Grande
    * @param parent
    * @param modal
+   * @wbp.parser.constructor
    */
   public Busqueda(java.awt.Frame parent, boolean modal) {
     super(parent, modal);
@@ -105,7 +106,7 @@ public class Busqueda extends javax.swing.JDialog {
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-    jLabel4.setText("Delegación :");
+    jLabel4.setText("Delegaci\u00F3n :");
 
     combobusquedadelegacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"-"}));
     combobusquedadelegacion.addActionListener(
@@ -570,7 +571,7 @@ public class Busqueda extends javax.swing.JDialog {
   private void txtbusquedadocumentoFocusLost(
       java.awt.event.FocusEvent evt) { // GEN-FIRST:event_txtbusquedadocumentoFocusLost
     if (!txtbusquedadocumento.getText().equalsIgnoreCase("")) {
-      int dni = validaciones.validar.comprobar(txtbusquedadocumento.getText());
+      int dni = validaciones.Validar.comprobar(txtbusquedadocumento.getText());
       if (dni < 0) { //
       } else {
         modelo = crearModelo();
