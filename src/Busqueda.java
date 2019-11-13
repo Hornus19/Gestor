@@ -15,8 +15,8 @@ public class Busqueda extends javax.swing.JDialog {
 
   DefaultTableModel modelo;
   Connection con;
-  ResultSet rs;
-  Statement st;
+  ResultSet rs, rs1;
+  Statement st, st1;
   String driver = "com.mysql.jdbc.Driver";
   String urlMysql = "jdbc:mysql://localhost:3306/";
   SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");;
@@ -34,21 +34,22 @@ public class Busqueda extends javax.swing.JDialog {
 
     try {
       Class.forName(driver).newInstance();
-      con = DriverManager.getConnection(urlMysql + "Clientes", "sencitel", "Ludwig1753");
+      con = DriverManager.getConnection(urlMysql + "sencitel", "sencitel", "Ludwig1753");
       st = con.createStatement();
-      rs = st.executeQuery("select DISTINCT(delegacion) from comerciales ");
+      st1 = con.createStatement();
+      rs = st.executeQuery("select DISTINCT(delegacion) from comercial ");
       if (rs.next()) {
         do {
           combobusquedadelegacion.addItem(rs.getString("delegacion"));
         } while (rs.next());
       }
-      rs = st.executeQuery("select nombre from comerciales where activo='SI'");
+      rs = st.executeQuery("select nombre from comercial where activo='SI'");
       if (rs.next()) {
         do {
           combobusquedacomercial.addItem(rs.getString("nombre"));
         } while (rs.next());
       }
-      rs = st.executeQuery("select DISTINCT(operador) from ventas");
+      rs = st.executeQuery("select DISTINCT(operador) from venta");
       if (rs.next()) {
         do {
           combobusoperador.addItem(rs.getString("operador"));
@@ -530,7 +531,7 @@ public class Busqueda extends javax.swing.JDialog {
     try {
       rs =
           st.executeQuery(
-              "select nombre from comerciales where activo='SI' and delegacion='"
+              "select nombre from comercial where activo='SI' and delegacion='"
                   + combobusquedadelegacion.getSelectedItem().toString()
                   + "'");
 
@@ -591,7 +592,7 @@ public class Busqueda extends javax.swing.JDialog {
       combobusoperador.setSelectedIndex(0);
       txtcodcomercial.setText("");
       combomes.setSelectedIndex(0);
-      rs = st.executeQuery("select nombre from comerciales where activo='SI'");
+      rs = st.executeQuery("select nombre from comercial where activo='SI'");
       if (rs.next()) {
         do {
           combobusquedacomercial.addItem(rs.getString("nombre"));
@@ -631,10 +632,14 @@ public class Busqueda extends javax.swing.JDialog {
 
         int mese = combomes.getSelectedIndex();
         String dato = "0" + String.valueOf(mese);
-        rs = st.executeQuery("select * from ventas where MONTH(fechacreacion) ='" + dato + "'");
+        rs = st.executeQuery("select * from venta where MONTH(fechacreacion) ='" + dato + "'");
         if (rs.next()) {
           modelo = crearModelo();
           do {
+            rs1 =
+                st.executeQuery(
+                    "select * from cliente where id='" + rs.getString("idcliente") + "'");
+            rs1.next();
             rs.getString("fechacreacion");
             String[] parts = rs.getString("fechacreacion").split("-");
             String ano = parts[0];
@@ -642,15 +647,15 @@ public class Busqueda extends javax.swing.JDialog {
             String dia = parts[2];
             String fecha = dia + "-" + mes + "-" + ano;
             String[] filas = new String[10];
-            filas[0] = String.valueOf(rs.getInt("numcliente"));
+            filas[0] = String.valueOf(rs.getInt("idcliente"));
             filas[1] = fecha;
-            filas[2] = rs.getString("nombrecliente");
-            filas[3] = rs.getString("documento");
+            filas[2] = rs1.getString("nombre");
+            filas[3] = rs1.getString("documento");
             filas[4] = rs.getString("segmento");
             filas[5] = rs.getString("operador");
             filas[6] = rs.getString("oferta");
             filas[7] = rs.getString("delegacion");
-            filas[8] = rs.getString("comercial");
+            filas[8] = rs.getString("usuario");
             filas[9] = rs.getString("estado");
             modelo.addRow(filas);
 
@@ -675,8 +680,7 @@ public class Busqueda extends javax.swing.JDialog {
         Integer.parseInt(tablabusqueda.getValueAt(tablabusqueda.getSelectedRow(), 0).toString());
     cargacliente(mod);
     if (evt.getClickCount() < 1) { //
-
-    } 
+    }
   } // GEN-LAST:event_tablabusquedaMouseClicked
 
   public void cargacliente(int mod) {
@@ -707,11 +711,16 @@ public class Busqueda extends javax.swing.JDialog {
 
   public void sinfiltro() {
     try {
-      rs = st.executeQuery("select * from ventas");
+      rs = st.executeQuery("select * from venta");
+
       if (rs.next()) {
         modelo = crearModelo();
 
         do {
+          rs1 =
+              st1.executeQuery(
+                  "select * from cliente where id='" + rs.getString("idcliente") + "'");
+          rs1.next();
           rs.getString("fechacreacion");
           String[] parts = rs.getString("fechacreacion").split("-");
           String ano = parts[0];
@@ -719,20 +728,22 @@ public class Busqueda extends javax.swing.JDialog {
           String dia = parts[2];
           String fecha = dia + "-" + mes + "-" + ano;
           String[] filas = new String[10];
-          filas[0] = rs.getString("numcliente");
+          filas[0] = rs1.getString("id");
           filas[1] = fecha;
-          filas[2] = rs.getString("nombrecliente");
-          filas[3] = rs.getString("documento");
+          filas[2] = rs1.getString("nombre");
+          filas[3] = rs1.getString("documento");
           filas[4] = rs.getString("segmento");
           filas[5] = rs.getString("operador");
           filas[6] = rs.getString("oferta");
           filas[7] = rs.getString("delegacion");
-          filas[8] = rs.getString("comercial");
+          filas[8] = rs.getString("usuario");
           filas[9] = rs.getString("estado");
-          modelo.addRow(filas);
 
+          modelo.addRow(filas);
+          rs.afterLast();
         } while (rs.next());
         tablabusqueda.setModel(modelo);
+
       } else {
 
         modelo.rowsRemoved(null);

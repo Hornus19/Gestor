@@ -30,7 +30,7 @@ public class InicioSesion extends javax.swing.JFrame {
       rootPane.setDefaultButton(btnentrarprincipal);
 
       Class.forName(driver).newInstance();
-      con = DriverManager.getConnection(urlMysql + "Clientes", "sencitel", "Ludwig1753");
+      con = DriverManager.getConnection(urlMysql + "sencitel", "sencitel", "Ludwig1753");
     } catch (ClassNotFoundException
         | InstantiationException
         | IllegalAccessException
@@ -197,7 +197,7 @@ public class InicioSesion extends javax.swing.JFrame {
       String pass;
       pass = new String(txtpass.getPassword());
       st = con.createStatement();
-      rs = st.executeQuery("select pass,activo from comerciales where usuario='" + usuario + "'");
+      rs = st.executeQuery("select pass,activo from comercial where usuario='" + usuario + "'");
       if (rs.next()) {
         String resultado = rs.getString("pass");
         if (rs.getString("activo").equalsIgnoreCase("SI")) {
