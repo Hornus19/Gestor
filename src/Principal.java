@@ -27,9 +27,10 @@ public class Principal extends javax.swing.JFrame {
 
   /** Creates new form Principal */
   public Principal(String usuario, String cod) {
-    if (!usuario.equalsIgnoreCase("")) {
+    if (!usuario.equalsIgnoreCase("") || cod.equalsIgnoreCase("")) {
       initComponents();
       logueado = usuario;
+      this.setVisible(true);
       buttonGroup1.add(Rdbtnlinea1ac);
       buttonGroup1.add(Rdbtnlinea1pt);
       buttonGroup1.add(Rdbtnlinea1ko);
@@ -84,9 +85,9 @@ public class Principal extends javax.swing.JFrame {
         Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
       }
     } else {
-
       initComponents();
       logueado = usuario;
+      this.setVisible(true);
       buttonGroup1.add(Rdbtnlinea1ac);
       buttonGroup1.add(Rdbtnlinea1pt);
       buttonGroup1.add(Rdbtnlinea1ko);
@@ -322,12 +323,7 @@ public class Principal extends javax.swing.JFrame {
     comboestados.setEditable(true);
   }
 
-  
-  Principal() {
-
-    throw new UnsupportedOperationException(
-        "Not supported yet."); // To change body of generated methods, choose Tools | Templates.
-  }
+  Principal() {}
 
   /**
    * This method is called from within the constructor to initialize the form. WARNING: Do NOT
@@ -2408,6 +2404,7 @@ public class Principal extends javax.swing.JFrame {
   private void btnbuscarActionPerformed(
       java.awt.event.ActionEvent evt) { // GEN-FIRST:event_btnbuscarActionPerformed
     Busqueda bs = new Busqueda(this, true);
+    this.setVisible(false);
     bs.setVisible(true);
     bs.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
     if (txtcargacliente.getText().equalsIgnoreCase("")) {
@@ -4948,7 +4945,7 @@ public class Principal extends javax.swing.JFrame {
       }
     } else {
       JOptionPane.showMessageDialog(
-          null, "Porfavor codigo para la busqueda", "Alta", JOptionPane.YES_NO_CANCEL_OPTION);
+          null, "Porfavor codigo para la busqueda", "Error", JOptionPane.YES_NO_CANCEL_OPTION);
     }
   } // GEN-LAST:event_txtcargaclienteFocusLost
 

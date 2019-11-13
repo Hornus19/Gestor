@@ -1,25 +1,18 @@
-
-
-/**
- *
- * @author David
- */
+/** @author David */
 public class CargarClientePojo {
-    private String codigo;
+  private String codigo;
 
-    public CargarClientePojo() {
-    }
+  public CargarClientePojo() {}
 
-    
-    public CargarClientePojo(String codigo) {
-        this.codigo = codigo;
-    }
+  public CargarClientePojo(String codigo) {
+    this.codigo = codigo;
+  }
 
-    public String getCodigo() {
-        return codigo;
-    }
+  public String getCodigo() {
+    return codigo;
+  }
 
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
+  public void setCodigo(String codigo) {
+    this.codigo = codigo;
+  }
 }

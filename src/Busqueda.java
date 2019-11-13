@@ -1,6 +1,3 @@
-
-import com.sun.java.swing.plaf.windows.resources.windows;
-import com.sun.javafx.scene.SceneHelper;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -9,856 +6,1083 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author David Grande
- */
+/** @author David Grande */
 public class Busqueda extends javax.swing.JDialog {
 
-    DefaultTableModel modelo;
-    Connection con;
-    ResultSet rs;
-    Statement st;
-    String driver = "com.mysql.jdbc.Driver";
-    String urlMysql = "jdbc:mysql://localhost:3306/";
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+  DefaultTableModel modelo;
+  Connection con;
+  ResultSet rs;
+  Statement st;
+  String driver = "com.mysql.jdbc.Driver";
+  String urlMysql = "jdbc:mysql://localhost:3306/";
+  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");;
 
-    ;
+  /**
+   * @author David Grande
+   * @param parent
+   * @param modal
+   */
+  public Busqueda(java.awt.Frame parent, boolean modal) {
+    super(parent, modal);
 
-    /**
-     * @author David Grande
-     * @param parent
-     * @param modal
-     */
-    public Busqueda(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    initComponents();
+    tablabusqueda.setAutoCreateRowSorter(true);
 
-        initComponents();
-        tablabusqueda.setAutoCreateRowSorter(true);
-
-        try {
-            Class.forName(driver).newInstance();
-            con = DriverManager.getConnection(urlMysql + "Clientes", "sencitel", "Ludwig1753");
-            st = con.createStatement();
-            rs = st.executeQuery("select DISTINCT(delegacion) from comerciales ");
-            if (rs.next()) {
-                do {
-                    combobusquedadelegacion.addItem(rs.getString("delegacion"));
-                } while (rs.next());
-
-            }
-            rs = st.executeQuery("select nombre from comerciales where activo='SI'");
-            if (rs.next()) {
-                do {
-                    combobusquedacomercial.addItem(rs.getString("nombre"));
-                } while (rs.next());
-            }
-            rs = st.executeQuery("select DISTINCT(operador) from ventas");
-            if (rs.next()) {
-                do {
-                    combobusoperador.addItem(rs.getString("operador"));
-                } while (rs.next());
-            }
-            rs = st.executeQuery("select DISTINCT(estado) from estados");
-            if (rs.next()) {
-                do {
-                    combobusquedaestado.addItem(rs.getString("estado"));
-                } while (rs.next());
-            }
-            sinfiltro();
-        } catch (SQLException ex) {
-            Logger.getLogger(InicioSesion.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException | IllegalAccessException | ClassNotFoundException ex) {
-            Logger.getLogger(Busqueda.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+    try {
+      Class.forName(driver).newInstance();
+      con = DriverManager.getConnection(urlMysql + "Clientes", "sencitel", "Ludwig1753");
+      st = con.createStatement();
+      rs = st.executeQuery("select DISTINCT(delegacion) from comerciales ");
+      if (rs.next()) {
+        do {
+          combobusquedadelegacion.addItem(rs.getString("delegacion"));
+        } while (rs.next());
+      }
+      rs = st.executeQuery("select nombre from comerciales where activo='SI'");
+      if (rs.next()) {
+        do {
+          combobusquedacomercial.addItem(rs.getString("nombre"));
+        } while (rs.next());
+      }
+      rs = st.executeQuery("select DISTINCT(operador) from ventas");
+      if (rs.next()) {
+        do {
+          combobusoperador.addItem(rs.getString("operador"));
+        } while (rs.next());
+      }
+      rs = st.executeQuery("select DISTINCT(estado) from estados");
+      if (rs.next()) {
+        do {
+          combobusquedaestado.addItem(rs.getString("estado"));
+        } while (rs.next());
+      }
+      sinfiltro();
+    } catch (SQLException ex) {
+      Logger.getLogger(InicioSesion.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (InstantiationException | IllegalAccessException | ClassNotFoundException ex) {
+      Logger.getLogger(Busqueda.class.getName()).log(Level.SEVERE, null, ex);
     }
+  }
 
-    private Busqueda(JFrame jFrame, boolean b) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        
-    }
+  private Busqueda(JFrame jFrame, boolean b) {
+    throw new UnsupportedOperationException(
+        "Not supported yet."); // To change body of generated methods, choose Tools | Templates.
+  }
 
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
-    @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+  /**
+   * This method is called from within the constructor to initialize the form. WARNING: Do NOT
+   * modify this code. The content of this method is always regenerated by the Form Editor.
+   */
+  @SuppressWarnings({"unchecked", "serial"})
+  // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+  private void initComponents() {
 
-        jLabel4 = new javax.swing.JLabel();
-        combobusquedadelegacion = new javax.swing.JComboBox<>();
-        combomes = new javax.swing.JComboBox();
-        jLabel7 = new javax.swing.JLabel();
-        combobusquedacomercial = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        combobusoperador = new javax.swing.JComboBox();
-        jLabel6 = new javax.swing.JLabel();
-        txtcodcomercial = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        txtbusquedadocumento = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        combobusquedaestado = new javax.swing.JComboBox<>();
-        btnsinfiltros = new javax.swing.JButton();
-        btnsalirbus = new javax.swing.JButton();
-        txtcodenvio = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tablabusqueda = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+    jLabel4 = new javax.swing.JLabel();
+    combobusquedadelegacion = new javax.swing.JComboBox<>();
+    combomes = new javax.swing.JComboBox();
+    jLabel7 = new javax.swing.JLabel();
+    combobusquedacomercial = new javax.swing.JComboBox<>();
+    jLabel3 = new javax.swing.JLabel();
+    jLabel5 = new javax.swing.JLabel();
+    combobusoperador = new javax.swing.JComboBox();
+    jLabel6 = new javax.swing.JLabel();
+    txtcodcomercial = new javax.swing.JTextField();
+    jLabel2 = new javax.swing.JLabel();
+    txtbusquedadocumento = new javax.swing.JTextField();
+    jLabel1 = new javax.swing.JLabel();
+    combobusquedaestado = new javax.swing.JComboBox<>();
+    btnsinfiltros = new javax.swing.JButton();
+    btnsalirbus = new javax.swing.JButton();
+    txtcodenvio = new javax.swing.JLabel();
+    jScrollPane1 = new javax.swing.JScrollPane();
+    tablabusqueda = new javax.swing.JTable();
+    jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+    setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel4.setText("Delegación :");
+    jLabel4.setText("Delegación :");
 
-        combobusquedadelegacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-" }));
-        combobusquedadelegacion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                combobusquedadelegacionActionPerformed(evt);
-            }
+    combobusquedadelegacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"-"}));
+    combobusquedadelegacion.addActionListener(
+        new java.awt.event.ActionListener() {
+          public void actionPerformed(java.awt.event.ActionEvent evt) {
+            combobusquedadelegacionActionPerformed(evt);
+          }
         });
 
-        combomes.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO", "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE" }));
-        combomes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                combomesActionPerformed(evt);
-            }
+    combomes.setModel(
+        new javax.swing.DefaultComboBoxModel(
+            new String[] {
+              "-",
+              "ENERO",
+              "FEBRERO",
+              "MARZO",
+              "ABRIL",
+              "MAYO",
+              "JUNIO",
+              "JULIO",
+              "AGOSTO",
+              "SEPTIEMBRE",
+              "OCTUBRE",
+              "NOVIEMBRE",
+              "DICIEMBRE"
+            }));
+    combomes.addActionListener(
+        new java.awt.event.ActionListener() {
+          public void actionPerformed(java.awt.event.ActionEvent evt) {
+            combomesActionPerformed(evt);
+          }
         });
 
-        jLabel7.setText("Mes Alta :");
+    jLabel7.setText("Mes Alta :");
 
-        combobusquedacomercial.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-" }));
-        combobusquedacomercial.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                combobusquedacomercialActionPerformed(evt);
-            }
+    combobusquedacomercial.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"-"}));
+    combobusquedacomercial.addActionListener(
+        new java.awt.event.ActionListener() {
+          public void actionPerformed(java.awt.event.ActionEvent evt) {
+            combobusquedacomercialActionPerformed(evt);
+          }
         });
-        combobusquedacomercial.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                combobusquedacomercialFocusLost(evt);
-            }
-        });
-
-        jLabel3.setText("Comercial :");
-
-        jLabel5.setText("Operador :");
-
-        combobusoperador.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-" }));
-        combobusoperador.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                combobusoperadorActionPerformed(evt);
-            }
+    combobusquedacomercial.addFocusListener(
+        new java.awt.event.FocusAdapter() {
+          public void focusLost(java.awt.event.FocusEvent evt) {
+            combobusquedacomercialFocusLost(evt);
+          }
         });
 
-        jLabel6.setText("Codigo Comercial :");
+    jLabel3.setText("Comercial :");
 
-        txtcodcomercial.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtcodcomercialFocusLost(evt);
-            }
+    jLabel5.setText("Operador :");
+
+    combobusoperador.setModel(new javax.swing.DefaultComboBoxModel(new String[] {"-"}));
+    combobusoperador.addActionListener(
+        new java.awt.event.ActionListener() {
+          public void actionPerformed(java.awt.event.ActionEvent evt) {
+            combobusoperadorActionPerformed(evt);
+          }
         });
 
-        jLabel2.setText("Documento :");
+    jLabel6.setText("Codigo Comercial :");
 
-        txtbusquedadocumento.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtbusquedadocumentoFocusLost(evt);
-            }
+    txtcodcomercial.addFocusListener(
+        new java.awt.event.FocusAdapter() {
+          public void focusLost(java.awt.event.FocusEvent evt) {
+            txtcodcomercialFocusLost(evt);
+          }
         });
 
-        jLabel1.setText("Estado :");
+    jLabel2.setText("Documento :");
 
-        combobusquedaestado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-" }));
-        combobusquedaestado.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                combobusquedaestadoFocusLost(evt);
-            }
+    txtbusquedadocumento.addFocusListener(
+        new java.awt.event.FocusAdapter() {
+          public void focusLost(java.awt.event.FocusEvent evt) {
+            txtbusquedadocumentoFocusLost(evt);
+          }
         });
 
-        btnsinfiltros.setText("Borrar Filtos");
-        btnsinfiltros.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnsinfiltrosActionPerformed(evt);
-            }
+    jLabel1.setText("Estado :");
+
+    combobusquedaestado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"-"}));
+    combobusquedaestado.addFocusListener(
+        new java.awt.event.FocusAdapter() {
+          public void focusLost(java.awt.event.FocusEvent evt) {
+            combobusquedaestadoFocusLost(evt);
+          }
         });
 
-        btnsalirbus.setText("Salir");
-        btnsalirbus.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnsalirbusActionPerformed(evt);
-            }
+    btnsinfiltros.setText("Borrar Filtos");
+    btnsinfiltros.addActionListener(
+        new java.awt.event.ActionListener() {
+          public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btnsinfiltrosActionPerformed(evt);
+          }
         });
 
-        tablabusqueda.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null}
+    btnsalirbus.setText("Salir");
+    btnsalirbus.addActionListener(
+        new java.awt.event.ActionListener() {
+          public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btnsalirbusActionPerformed(evt);
+          }
+        });
+
+    tablabusqueda.setModel(
+        new javax.swing.table.DefaultTableModel(
+            new Object[][] {
+              {null, null, null, null, null, null, null, null, null, null},
+              {null, null, null, null, null, null, null, null, null, null},
+              {null, null, null, null, null, null, null, null, null, null},
+              {null, null, null, null, null, null, null, null, null, null}
             },
-            new String [] {
-                "Cod_Cliente", "Fecha Creacion", "Nombre Cliente", "Documento", "Segmento", "Operador", "Oferta", "Delegacion", "Comercial", "Estado"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false
-            };
+            new String[] {
+              "Cod_Cliente",
+              "Fecha Creacion",
+              "Nombre Cliente",
+              "Documento",
+              "Segmento",
+              "Operador",
+              "Oferta",
+              "Delegacion",
+              "Comercial",
+              "Estado"
+            }) {
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
+          Class[] types =
+              new Class[] {
+                java.lang.Integer.class,
+                java.lang.String.class,
+                java.lang.String.class,
+                java.lang.String.class,
+                java.lang.String.class,
+                java.lang.String.class,
+                java.lang.String.class,
+                java.lang.String.class,
+                java.lang.String.class,
+                java.lang.String.class
+              };
+          boolean[] canEdit =
+              new boolean[] {false, false, false, false, false, false, false, false, false, false};
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
+          public Class getColumnClass(int columnIndex) {
+            return types[columnIndex];
+          }
+
+          public boolean isCellEditable(int rowIndex, int columnIndex) {
+            return canEdit[columnIndex];
+          }
         });
-        tablabusqueda.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        tablabusqueda.setRowSelectionAllowed(false);
-        tablabusqueda.getTableHeader().setReorderingAllowed(false);
-        tablabusqueda.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tablabusquedaMouseClicked(evt);
-            }
+    tablabusqueda.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+    tablabusqueda.setRowSelectionAllowed(false);
+    tablabusqueda.getTableHeader().setReorderingAllowed(false);
+    tablabusqueda.addMouseListener(
+        new java.awt.event.MouseAdapter() {
+          public void mouseClicked(java.awt.event.MouseEvent evt) {
+            tablabusquedaMouseClicked(evt);
+          }
         });
-        jScrollPane1.setViewportView(tablabusqueda);
-        tablabusqueda.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+    jScrollPane1.setViewportView(tablabusqueda);
+    tablabusqueda
+        .getColumnModel()
+        .getSelectionModel()
+        .setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
-        jButton1.setText("Actualizar");
+    jButton1.setText("Actualizar");
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(combobusquedadelegacion, 0, 173, Short.MAX_VALUE)
-                    .addComponent(combobusquedacomercial, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtbusquedadocumento)
-                    .addComponent(combobusquedaestado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(combobusoperador, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtcodcomercial))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnsinfiltros)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnsalirbus, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtcodenvio)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(combomes, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(188, 188, 188)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jScrollPane1)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(combobusquedadelegacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel7)
-                            .addComponent(combomes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtcodenvio))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(combobusquedacomercial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel5))
-                    .addComponent(combobusoperador, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtcodcomercial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 18, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnsalirbus, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnsinfiltros, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(txtbusquedadocumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(combobusquedaestado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-        );
+    javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+    getContentPane().setLayout(layout);
+    layout.setHorizontalGroup(
+        layout
+            .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(
+                layout
+                    .createSequentialGroup()
+                    .addGap(26, 26, 26)
+                    .addGroup(
+                        layout
+                            .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(
+                                layout
+                                    .createParallelGroup(
+                                        javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(
+                                        jLabel6,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                        Short.MAX_VALUE)
+                                    .addComponent(
+                                        jLabel5,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                        Short.MAX_VALUE)
+                                    .addComponent(
+                                        jLabel3,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                        Short.MAX_VALUE)
+                                    .addComponent(
+                                        jLabel4,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                        Short.MAX_VALUE))
+                            .addGroup(
+                                layout
+                                    .createParallelGroup(
+                                        javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(
+                                        jLabel1,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                        Short.MAX_VALUE)
+                                    .addComponent(
+                                        jLabel2,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                        Short.MAX_VALUE)))
+                    .addGap(31, 31, 31)
+                    .addGroup(
+                        layout
+                            .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(combobusquedadelegacion, 0, 173, Short.MAX_VALUE)
+                            .addComponent(
+                                combobusquedacomercial,
+                                0,
+                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                Short.MAX_VALUE)
+                            .addComponent(txtbusquedadocumento)
+                            .addComponent(
+                                combobusquedaestado,
+                                0,
+                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                Short.MAX_VALUE)
+                            .addComponent(
+                                combobusoperador,
+                                0,
+                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                Short.MAX_VALUE)
+                            .addComponent(txtcodcomercial))
+                    .addGap(18, 18, 18)
+                    .addGroup(
+                        layout
+                            .createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(
+                                layout
+                                    .createSequentialGroup()
+                                    .addGap(0, 0, Short.MAX_VALUE)
+                                    .addComponent(btnsinfiltros)
+                                    .addPreferredGap(
+                                        javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                        Short.MAX_VALUE)
+                                    .addComponent(
+                                        btnsalirbus,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE,
+                                        89,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(
+                                layout
+                                    .createSequentialGroup()
+                                    .addComponent(txtcodenvio)
+                                    .addPreferredGap(
+                                        javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+                                        62,
+                                        Short.MAX_VALUE)
+                                    .addComponent(
+                                        jLabel7,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE,
+                                        95,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(
+                                        combomes,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE,
+                                        168,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addContainerGap())
+            .addGroup(
+                layout
+                    .createSequentialGroup()
+                    .addGap(188, 188, 188)
+                    .addComponent(
+                        jButton1,
+                        javax.swing.GroupLayout.PREFERRED_SIZE,
+                        133,
+                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jScrollPane1));
+    layout.setVerticalGroup(
+        layout
+            .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(
+                layout
+                    .createSequentialGroup()
+                    .addComponent(
+                        jScrollPane1,
+                        javax.swing.GroupLayout.PREFERRED_SIZE,
+                        227,
+                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(18, 18, 18)
+                    .addComponent(
+                        jButton1,
+                        javax.swing.GroupLayout.PREFERRED_SIZE,
+                        26,
+                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addGroup(
+                        layout
+                            .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(
+                                javax.swing.GroupLayout.Alignment.TRAILING,
+                                layout
+                                    .createSequentialGroup()
+                                    .addGroup(
+                                        layout
+                                            .createParallelGroup(
+                                                javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(
+                                                combobusquedadelegacion,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel4)
+                                            .addComponent(jLabel7)
+                                            .addComponent(
+                                                combomes,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtcodenvio))
+                                    .addPreferredGap(
+                                        javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(
+                                        layout
+                                            .createParallelGroup(
+                                                javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(
+                                                combobusquedacomercial,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel3))
+                                    .addPreferredGap(
+                                        javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jLabel5))
+                            .addComponent(
+                                combobusoperador,
+                                javax.swing.GroupLayout.Alignment.TRAILING,
+                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(
+                        layout
+                            .createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(
+                                txtcodcomercial,
+                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
+                    .addGroup(
+                        layout
+                            .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(
+                                layout
+                                    .createSequentialGroup()
+                                    .addPreferredGap(
+                                        javax.swing.LayoutStyle.ComponentPlacement.UNRELATED,
+                                        18,
+                                        Short.MAX_VALUE)
+                                    .addGroup(
+                                        layout
+                                            .createParallelGroup(
+                                                javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(
+                                                btnsalirbus,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                53,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(
+                                                btnsinfiltros,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                53,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(
+                                layout
+                                    .createSequentialGroup()
+                                    .addGap(9, 9, 9)
+                                    .addGroup(
+                                        layout
+                                            .createParallelGroup(
+                                                javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(jLabel2)
+                                            .addComponent(
+                                                txtbusquedadocumento,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(
+                                        javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(
+                                        layout
+                                            .createParallelGroup(
+                                                javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(jLabel1)
+                                            .addComponent(
+                                                combobusquedaestado,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE))))));
 
-        pack();
-    }// </editor-fold>//GEN-END:initComponents
+    pack();
+  } // </editor-fold>//GEN-END:initComponents
 
-    private void combobusquedadelegacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combobusquedadelegacionActionPerformed
+  private void combobusquedadelegacionActionPerformed(
+      java.awt.event.ActionEvent evt) { // GEN-FIRST:event_combobusquedadelegacionActionPerformed
+    modelo = crearModelo();
+    tablabusqueda.setModel(modelo);
+    filtrodelegacion(combobusquedadelegacion.getSelectedItem().toString());
+    combobusquedacomercial.removeAllItems();
+    combobusquedacomercial.addItem("-");
+    try {
+      rs =
+          st.executeQuery(
+              "select nombre from comerciales where activo='SI' and delegacion='"
+                  + combobusquedadelegacion.getSelectedItem().toString()
+                  + "'");
+
+      if (rs.next()) {
+        do {
+          combobusquedacomercial.addItem(rs.getString("nombre"));
+        } while (rs.next());
+      }
+      combobusquedacomercial.setSelectedIndex(0);
+    } catch (SQLException ex) {
+      Logger.getLogger(Busqueda.class.getName()).log(Level.SEVERE, null, ex);
+    }
+  } // GEN-LAST:event_combobusquedadelegacionActionPerformed
+
+  private void combobusquedacomercialActionPerformed(
+      java.awt.event.ActionEvent evt) { // GEN-FIRST:event_combobusquedacomercialActionPerformed
+  } // GEN-LAST:event_combobusquedacomercialActionPerformed
+
+  private void combobusoperadorActionPerformed(
+      java.awt.event.ActionEvent evt) { // GEN-FIRST:event_combobusoperadorActionPerformed
+    modelo = crearModelo();
+    tablabusqueda.setModel(modelo);
+    filtrooperador(combobusoperador.getSelectedItem().toString());
+  } // GEN-LAST:event_combobusoperadorActionPerformed
+
+  private void txtcodcomercialFocusLost(
+      java.awt.event.FocusEvent evt) { // GEN-FIRST:event_txtcodcomercialFocusLost
+    if (!txtcodcomercial.getText().equalsIgnoreCase("")) {
+
+      modelo = crearModelo();
+      tablabusqueda.setModel(modelo);
+      filtrocodigo(txtcodcomercial.getText());
+    }
+  } // GEN-LAST:event_txtcodcomercialFocusLost
+
+  private void txtbusquedadocumentoFocusLost(
+      java.awt.event.FocusEvent evt) { // GEN-FIRST:event_txtbusquedadocumentoFocusLost
+    if (!txtbusquedadocumento.getText().equalsIgnoreCase("")) {
+      int dni = validaciones.validar.comprobar(txtbusquedadocumento.getText());
+      if (dni < 0) { //
+      } else {
         modelo = crearModelo();
         tablabusqueda.setModel(modelo);
-        filtrodelegacion(combobusquedadelegacion.getSelectedItem().toString());
-        combobusquedacomercial.removeAllItems();
-        combobusquedacomercial.addItem("-");
-        try {
-            rs = st.executeQuery("select nombre from comerciales where activo='SI' and delegacion='" + combobusquedadelegacion.getSelectedItem().toString() + "'");
+        filtrodocumento(txtbusquedadocumento.getText());
+      }
+    }
+  } // GEN-LAST:event_txtbusquedadocumentoFocusLost
 
-            if (rs.next()) {
-                do {
-                    combobusquedacomercial.addItem(rs.getString("nombre"));
-                } while (rs.next());
-            }
-            combobusquedacomercial.setSelectedIndex(0);
-        } catch (SQLException ex) {
-            Logger.getLogger(Busqueda.class.getName()).log(Level.SEVERE, null, ex);
+  private void btnsinfiltrosActionPerformed(
+      java.awt.event.ActionEvent evt) { // GEN-FIRST:event_btnsinfiltrosActionPerformed
+    combobusquedacomercial.removeAllItems();
+    combobusquedacomercial.addItem("-");
+    try {
+      txtbusquedadocumento.setText("");
+      combobusquedacomercial.setSelectedIndex(0);
+      combobusquedadelegacion.setSelectedIndex(0);
+      combobusquedaestado.setSelectedIndex(0);
+      combobusoperador.setSelectedIndex(0);
+      txtcodcomercial.setText("");
+      combomes.setSelectedIndex(0);
+      rs = st.executeQuery("select nombre from comerciales where activo='SI'");
+      if (rs.next()) {
+        do {
+          combobusquedacomercial.addItem(rs.getString("nombre"));
+        } while (rs.next());
+      }
+      sinfiltro();
+    } catch (SQLException ex) {
+      Logger.getLogger(Busqueda.class.getName()).log(Level.SEVERE, null, ex);
+    }
+  } // GEN-LAST:event_btnsinfiltrosActionPerformed
+
+  private void btnsalirbusActionPerformed(
+      java.awt.event.ActionEvent evt) { // GEN-FIRST:event_btnsalirbusActionPerformed
+    this.setVisible(false);
+    Principal ps = new Principal("","");
+    ps.setVisible(true);
+  } // GEN-LAST:event_btnsalirbusActionPerformed
+
+  private void combobusquedacomercialFocusLost(
+      java.awt.event.FocusEvent evt) { // GEN-FIRST:event_combobusquedacomercialFocusLost
+    modelo = crearModelo();
+    tablabusqueda.setModel(modelo);
+    filtrocomercial(combobusquedacomercial.getSelectedItem().toString());
+  } // GEN-LAST:event_combobusquedacomercialFocusLost
+
+  private void combobusquedaestadoFocusLost(
+      java.awt.event.FocusEvent evt) { // GEN-FIRST:event_combobusquedaestadoFocusLost
+    modelo = crearModelo();
+    tablabusqueda.setModel(modelo);
+    filtroestado(combobusquedaestado.getSelectedItem().toString());
+  } // GEN-LAST:event_combobusquedaestadoFocusLost
+
+  private void combomesActionPerformed(
+      java.awt.event.ActionEvent evt) { // GEN-FIRST:event_combomesActionPerformed
+    try {
+      if (!combomes.getSelectedItem().toString().equalsIgnoreCase("-")) {
+
+        int mese = combomes.getSelectedIndex();
+        String dato = "0" + String.valueOf(mese);
+        rs = st.executeQuery("select * from ventas where MONTH(fechacreacion) ='" + dato + "'");
+        if (rs.next()) {
+          modelo = crearModelo();
+          do {
+            rs.getString("fechacreacion");
+            String[] parts = rs.getString("fechacreacion").split("-");
+            String ano = parts[0];
+            String mes = parts[1];
+            String dia = parts[2];
+            String fecha = dia + "-" + mes + "-" + ano;
+            String[] filas = new String[10];
+            filas[0] = String.valueOf(rs.getInt("numcliente"));
+            filas[1] = fecha;
+            filas[2] = rs.getString("nombrecliente");
+            filas[3] = rs.getString("documento");
+            filas[4] = rs.getString("segmento");
+            filas[5] = rs.getString("operador");
+            filas[6] = rs.getString("oferta");
+            filas[7] = rs.getString("delegacion");
+            filas[8] = rs.getString("comercial");
+            filas[9] = rs.getString("estado");
+            modelo.addRow(filas);
+
+          } while (rs.next());
+          tablabusqueda.setModel(modelo);
+        } else {
+          modelo.rowsRemoved(null);
+          modelo = crearModelo();
+          tablabusqueda.setModel(modelo);
         }
+      } else {
+        sinfiltro();
+      }
+    } catch (SQLException ex) {
+      Logger.getLogger(InicioSesion.class.getName()).log(Level.SEVERE, null, ex);
+    }
+  } // GEN-LAST:event_combomesActionPerformed
 
-    }//GEN-LAST:event_combobusquedadelegacionActionPerformed
+  private void tablabusquedaMouseClicked(
+      java.awt.event.MouseEvent evt) { // GEN-FIRST:event_tablabusquedaMouseClicked
+    int mod =
+        Integer.parseInt(tablabusqueda.getValueAt(tablabusqueda.getSelectedRow(), 0).toString());
+    cargacliente(mod);
+    System.out.println(evt.getClickCount());
+    if (evt.getClickCount() < 1) { //
+      
+    } else {
 
-    private void combobusquedacomercialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combobusquedacomercialActionPerformed
+    }
+  } // GEN-LAST:event_tablabusquedaMouseClicked
 
-    }//GEN-LAST:event_combobusquedacomercialActionPerformed
+  public void cargacliente(int mod) {
+    String cod_cliente = String.valueOf(mod);
+    System.out.println(cod_cliente);
+    String blanco = "";
+    this.dispose();
+    Principal ps = new Principal(blanco, cod_cliente);
+    ps.setVisible(true);
+  }
 
-    private void combobusoperadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combobusoperadorActionPerformed
+  private DefaultTableModel crearModelo() {
+
+    Object[] columnas = new Object[10];
+    columnas[0] = "Cod_cliente";
+    columnas[1] = "Fecha Alta";
+    columnas[2] = "Nombre Cliente";
+    columnas[3] = "Documento";
+    columnas[4] = "Segmento";
+    columnas[5] = "Operador";
+    columnas[6] = "Oferta";
+    columnas[7] = "Delegacion";
+    columnas[8] = "Comercial";
+    columnas[9] = "Estado";
+
+    modelo = new DefaultTableModel(columnas, 0);
+
+    return modelo;
+  }
+
+  public void sinfiltro() {
+    try {
+      rs = st.executeQuery("select * from ventas");
+      if (rs.next()) {
+        modelo = crearModelo();
+
+        do {
+          rs.getString("fechacreacion");
+          String[] parts = rs.getString("fechacreacion").split("-");
+          String ano = parts[0];
+          String mes = parts[1];
+          String dia = parts[2];
+          String fecha = dia + "-" + mes + "-" + ano;
+          String[] filas = new String[10];
+          filas[0] = rs.getString("numcliente");
+          filas[1] = fecha;
+          filas[2] = rs.getString("nombrecliente");
+          filas[3] = rs.getString("documento");
+          filas[4] = rs.getString("segmento");
+          filas[5] = rs.getString("operador");
+          filas[6] = rs.getString("oferta");
+          filas[7] = rs.getString("delegacion");
+          filas[8] = rs.getString("comercial");
+          filas[9] = rs.getString("estado");
+          modelo.addRow(filas);
+
+        } while (rs.next());
+        tablabusqueda.setModel(modelo);
+      } else {
+
+        modelo.rowsRemoved(null);
         modelo = crearModelo();
         tablabusqueda.setModel(modelo);
-        filtrooperador(combobusoperador.getSelectedItem().toString());
-    }//GEN-LAST:event_combobusoperadorActionPerformed
+      }
 
-    private void txtcodcomercialFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtcodcomercialFocusLost
-        if (!txtcodcomercial.getText().equalsIgnoreCase("")) {
+    } catch (SQLException ex) {
+      Logger.getLogger(InicioSesion.class.getName()).log(Level.SEVERE, null, ex);
+    }
+  }
 
-            modelo = crearModelo();
-            tablabusqueda.setModel(modelo);
-            filtrocodigo(txtcodcomercial.getText());
+  public void filtrodelegacion(String delegacion) {
+    try {
+      if (!delegacion.equalsIgnoreCase("-")) {
+        rs = st.executeQuery("select * from ventas where delegacion='" + delegacion + "'");
+        if (rs.next()) {
+          modelo = crearModelo();
+          do {
+            rs.getString("fechacreacion");
+            String[] parts = rs.getString("fechacreacion").split("-");
+            String ano = parts[0];
+            String mes = parts[1];
+            String dia = parts[2];
+            String fecha = dia + "-" + mes + "-" + ano;
+            String[] filas = new String[10];
+            filas[0] = String.valueOf(rs.getInt("numcliente"));
+            filas[1] = fecha;
+            filas[2] = rs.getString("nombrecliente");
+            filas[3] = rs.getString("documento");
+            filas[4] = rs.getString("segmento");
+            filas[5] = rs.getString("operador");
+            filas[6] = rs.getString("oferta");
+            filas[7] = rs.getString("delegacion");
+            filas[8] = rs.getString("comercial");
+            filas[9] = rs.getString("estado");
+            modelo.addRow(filas);
 
+          } while (rs.next());
+          tablabusqueda.setModel(modelo);
+        } else {
+          modelo.rowsRemoved(null);
+          modelo = crearModelo();
+          tablabusqueda.setModel(modelo);
         }
-    }//GEN-LAST:event_txtcodcomercialFocusLost
+      } else {
+        sinfiltro();
+      }
+    } catch (SQLException ex) {
+      Logger.getLogger(InicioSesion.class.getName()).log(Level.SEVERE, null, ex);
+    }
+  }
 
-    private void txtbusquedadocumentoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtbusquedadocumentoFocusLost
-        if (!txtbusquedadocumento.getText().equalsIgnoreCase("")) {
-            int dni = validaciones.validar.comprobar(txtbusquedadocumento.getText());
-            if (dni < 0) {
-            } else {
-                modelo = crearModelo();
-                tablabusqueda.setModel(modelo);
-                filtrodocumento(txtbusquedadocumento.getText());
-            }
+  public void filtrodocumento(String docu) {
+    try {
+      if (!docu.equalsIgnoreCase("-")) {
+        rs = st.executeQuery("select * from ventas where documento='" + docu + "'");
+        if (rs.next()) {
+          modelo = crearModelo();
+          do {
+            rs.getString("fechacreacion");
+            String[] parts = rs.getString("fechacreacion").split("-");
+            String ano = parts[0];
+            String mes = parts[1];
+            String dia = parts[2];
+            String fecha = dia + "-" + mes + "-" + ano;
+            String[] filas = new String[10];
+            filas[0] = String.valueOf(rs.getInt("numcliente"));
+            filas[1] = fecha;
+            filas[2] = rs.getString("nombrecliente");
+            filas[3] = rs.getString("documento");
+            filas[4] = rs.getString("segmento");
+            filas[5] = rs.getString("operador");
+            filas[6] = rs.getString("oferta");
+            filas[7] = rs.getString("delegacion");
+            filas[8] = rs.getString("comercial");
+            filas[9] = rs.getString("estado");
+            modelo.addRow(filas);
+
+          } while (rs.next());
+          tablabusqueda.setModel(modelo);
+        } else {
+          modelo.rowsRemoved(null);
+          modelo = crearModelo();
+          tablabusqueda.setModel(modelo);
         }
-    }//GEN-LAST:event_txtbusquedadocumentoFocusLost
+      } else {
+        sinfiltro();
+      }
+    } catch (SQLException ex) {
+      Logger.getLogger(InicioSesion.class.getName()).log(Level.SEVERE, null, ex);
+    }
+  }
 
-    private void btnsinfiltrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsinfiltrosActionPerformed
-        combobusquedacomercial.removeAllItems();
-        combobusquedacomercial.addItem("-");
-        try {
-            txtbusquedadocumento.setText("");
-            combobusquedacomercial.setSelectedIndex(0);
-            combobusquedadelegacion.setSelectedIndex(0);
-            combobusquedaestado.setSelectedIndex(0);
-            combobusoperador.setSelectedIndex(0);
-            txtcodcomercial.setText("");
-            combomes.setSelectedIndex(0);
-            rs = st.executeQuery("select nombre from comerciales where activo='SI'");
-            if (rs.next()) {
-                do {
-                    combobusquedacomercial.addItem(rs.getString("nombre"));
-                } while (rs.next());
-            }
-            sinfiltro();
-        } catch (SQLException ex) {
-            Logger.getLogger(Busqueda.class.getName()).log(Level.SEVERE, null, ex);
+  public void filtroestado(String docu) {
+    try {
+      if (!combobusquedaestado.getSelectedItem().toString().equalsIgnoreCase("-")) {
+        if (combobusquedacomercial.getSelectedItem().toString().equalsIgnoreCase("-")) {
+          rs =
+              st.executeQuery(
+                  "select * from ventas where estado='"
+                      + combobusquedaestado.getSelectedItem().toString()
+                      + "'");
+        } else {
+          rs =
+              st.executeQuery(
+                  "select * from ventas where estado='"
+                      + combobusquedaestado.getSelectedItem().toString()
+                      + "' and comercial='"
+                      + combobusquedacomercial.getSelectedItem().toString()
+                      + "'");
         }
-    }//GEN-LAST:event_btnsinfiltrosActionPerformed
+        if (rs.next()) {
+          modelo = crearModelo();
+          do {
+            rs.getString("fechacreacion");
+            String[] parts = rs.getString("fechacreacion").split("-");
+            String ano = parts[0];
+            String mes = parts[1];
+            String dia = parts[2];
+            String fecha = dia + "-" + mes + "-" + ano;
+            String[] filas = new String[10];
+            filas[0] = String.valueOf(rs.getInt("numcliente"));
+            filas[1] = fecha;
+            filas[2] = rs.getString("nombrecliente");
+            filas[3] = rs.getString("documento");
+            filas[4] = rs.getString("segmento");
+            filas[5] = rs.getString("operador");
+            filas[6] = rs.getString("oferta");
+            filas[7] = rs.getString("delegacion");
+            filas[8] = rs.getString("comercial");
+            filas[9] = rs.getString("estado");
+            modelo.addRow(filas);
 
-    private void btnsalirbusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalirbusActionPerformed
-        this.setVisible(false);
-    }//GEN-LAST:event_btnsalirbusActionPerformed
-
-    private void combobusquedacomercialFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_combobusquedacomercialFocusLost
-        modelo = crearModelo();
-        tablabusqueda.setModel(modelo);
-        filtrocomercial(combobusquedacomercial.getSelectedItem().toString());
-    }//GEN-LAST:event_combobusquedacomercialFocusLost
-
-    private void combobusquedaestadoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_combobusquedaestadoFocusLost
-        modelo = crearModelo();
-        tablabusqueda.setModel(modelo);
-        filtroestado(combobusquedaestado.getSelectedItem().toString());
-    }//GEN-LAST:event_combobusquedaestadoFocusLost
-
-    private void combomesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combomesActionPerformed
-        try {
-            if (!combomes.getSelectedItem().toString().equalsIgnoreCase("-")) {
-
-                int mese = combomes.getSelectedIndex();
-                String dato = "0" + String.valueOf(mese);
-                rs = st.executeQuery("select * from ventas where MONTH(fechacreacion) ='" + dato + "'");
-                if (rs.next()) {
-                    modelo = crearModelo();
-                    do {
-                        rs.getString("fechacreacion");
-                        String[] parts = rs.getString("fechacreacion").split("-");
-                        String ano = parts[0];
-                        String mes = parts[1];
-                        String dia = parts[2];
-                        String fecha = dia + "-" + mes + "-" + ano;
-                        String[] filas = new String[10];
-                        filas[0] = String.valueOf(rs.getInt("numcliente"));
-                        filas[1] = fecha;
-                        filas[2] = rs.getString("nombrecliente");
-                        filas[3] = rs.getString("documento");
-                        filas[4] = rs.getString("segmento");
-                        filas[5] = rs.getString("operador");
-                        filas[6] = rs.getString("oferta");
-                        filas[7] = rs.getString("delegacion");
-                        filas[8] = rs.getString("comercial");
-                        filas[9] = rs.getString("estado");
-                        modelo.addRow(filas);
-
-                    } while (rs.next());
-                    tablabusqueda.setModel(modelo);
-                } else {
-                    modelo.rowsRemoved(null);
-                    modelo = crearModelo();
-                    tablabusqueda.setModel(modelo);
-                }
-            } else {
-                sinfiltro();
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(InicioSesion.class.getName()).log(Level.SEVERE, null, ex);
-
-        }
-    }//GEN-LAST:event_combomesActionPerformed
-
-    private void tablabusquedaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablabusquedaMouseClicked
-        int mod = Integer.parseInt(tablabusqueda.getValueAt(tablabusqueda.getSelectedRow(), 0).toString());
-        cargacliente(mod);
-        if (evt.getClickCount() <= 1) {
+          } while (rs.next());
+          tablabusqueda.setModel(modelo);
 
         } else {
-
+          modelo.rowsRemoved(null);
+          modelo = crearModelo();
+          tablabusqueda.setModel(modelo);
         }
-    }//GEN-LAST:event_tablabusquedaMouseClicked
-
-    public void cargacliente(int mod) {
-        String cod_cliente = String.valueOf(mod);
-        System.out.println(cod_cliente);
-        String blanco = "";
-        this.dispose();
-        Principal ps = new Principal(blanco, cod_cliente);
-        ps.setVisible(true);
-        
+      } else {
+        sinfiltro();
+      }
+    } catch (SQLException ex) {
+      Logger.getLogger(InicioSesion.class.getName()).log(Level.SEVERE, null, ex);
     }
+  }
 
-    private DefaultTableModel crearModelo() {
+  public void filtrocodigo(String cod) {
+    try {
+      if (!cod.equalsIgnoreCase("-")) {
+        rs = st.executeQuery("select select * from ventas where codcomercial='" + cod + "'");
+        if (rs.next()) {
+          modelo = crearModelo();
+          do {
+            rs.getString("fechacreacion");
+            String[] parts = rs.getString("fechacreacion").split("-");
+            String ano = parts[0];
+            String mes = parts[1];
+            String dia = parts[2];
+            String fecha = dia + "-" + mes + "-" + ano;
+            String[] filas = new String[10];
+            filas[0] = String.valueOf(rs.getInt("numcliente"));
+            filas[1] = fecha;
+            filas[2] = rs.getString("nombrecliente");
+            filas[3] = rs.getString("documento");
+            filas[4] = rs.getString("segmento");
+            filas[5] = rs.getString("operador");
+            filas[6] = rs.getString("oferta");
+            filas[7] = rs.getString("delegacion");
+            filas[8] = rs.getString("comercial");
+            filas[9] = rs.getString("estado");
+            modelo.addRow(filas);
 
-        Object[] columnas = new Object[10];
-        columnas[0] = "Cod_cliente";
-        columnas[1] = "Fecha Alta";
-        columnas[2] = "Nombre Cliente";
-        columnas[3] = "Documento";
-        columnas[4] = "Segmento";
-        columnas[5] = "Operador";
-        columnas[6] = "Oferta";
-        columnas[7] = "Delegacion";
-        columnas[8] = "Comercial";
-        columnas[9] = "Estado";
-
-        modelo = new DefaultTableModel(columnas, 0);
-
-        return modelo;
-    }
-
-    public void sinfiltro() {
-        try {
-            rs = st.executeQuery("select * from ventas");
-            if (rs.next()) {
-                modelo = crearModelo();
-                do {
-                    rs.getString("fechacreacion");
-                    String[] parts = rs.getString("fechacreacion").split("-");
-                    String ano = parts[0];
-                    String mes = parts[1];
-                    String dia = parts[2];
-                    String fecha = dia + "-" + mes + "-" + ano;
-                    String[] filas = new String[10];
-                    filas[0] = rs.getString("numcliente");
-                    filas[1] = fecha;
-                    filas[2] = rs.getString("nombrecliente");
-                    filas[3] = rs.getString("documento");
-                    filas[4] = rs.getString("segmento");
-                    filas[5] = rs.getString("operador");
-                    filas[6] = rs.getString("oferta");
-                    filas[7] = rs.getString("delegacion");
-                    filas[8] = rs.getString("comercial");
-                    filas[9] = rs.getString("estado");
-                    modelo.addRow(filas);
-
-                } while (rs.next());
-                tablabusqueda.setModel(modelo);
-            } else {
-
-                modelo.rowsRemoved(null);
-                modelo = crearModelo();
-                tablabusqueda.setModel(modelo);
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(InicioSesion.class.getName()).log(Level.SEVERE, null, ex);
-
+          } while (rs.next());
+          tablabusqueda.setModel(modelo);
+        } else {
+          modelo.rowsRemoved(null);
+          modelo = crearModelo();
+          tablabusqueda.setModel(modelo);
         }
+      } else {
+        sinfiltro();
+      }
+    } catch (SQLException ex) {
+      Logger.getLogger(InicioSesion.class.getName()).log(Level.SEVERE, null, ex);
     }
+  }
 
-    public void filtrodelegacion(String delegacion) {
-        try {
-            if (!delegacion.equalsIgnoreCase("-")) {
-                rs = st.executeQuery("select * from ventas where delegacion='" + delegacion + "'");
-                if (rs.next()) {
-                    modelo = crearModelo();
-                    do {
-                        rs.getString("fechacreacion");
-                        String[] parts = rs.getString("fechacreacion").split("-");
-                        String ano = parts[0];
-                        String mes = parts[1];
-                        String dia = parts[2];
-                        String fecha = dia + "-" + mes + "-" + ano;
-                        String[] filas = new String[10];
-                        filas[0] = String.valueOf(rs.getInt("numcliente"));
-                        filas[1] = fecha;
-                        filas[2] = rs.getString("nombrecliente");
-                        filas[3] = rs.getString("documento");
-                        filas[4] = rs.getString("segmento");
-                        filas[5] = rs.getString("operador");
-                        filas[6] = rs.getString("oferta");
-                        filas[7] = rs.getString("delegacion");
-                        filas[8] = rs.getString("comercial");
-                        filas[9] = rs.getString("estado");
-                        modelo.addRow(filas);
-
-                    } while (rs.next());
-                    tablabusqueda.setModel(modelo);
-                } else {
-                    modelo.rowsRemoved(null);
-                    modelo = crearModelo();
-                    tablabusqueda.setModel(modelo);
-                }
-            } else {
-                sinfiltro();
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(InicioSesion.class.getName()).log(Level.SEVERE, null, ex);
-
+  public void filtrocomercial(String comercial) {
+    try {
+      if (!comercial.equalsIgnoreCase("-")) {
+        if (combobusquedaestado.getSelectedItem().toString().equalsIgnoreCase("-")) {
+          rs = st.executeQuery("select * from ventas where comercial='" + comercial + "'");
+        } else {
+          rs =
+              st.executeQuery(
+                  "select * from ventas where estado='"
+                      + combobusquedaestado.getSelectedItem().toString()
+                      + "' and comercial='"
+                      + combobusquedacomercial.getSelectedItem().toString()
+                      + "'");
         }
-    }
+        if (rs.next()) {
+          modelo = crearModelo();
+          do {
+            rs.getString("fechacreacion");
+            String[] parts = rs.getString("fechacreacion").split("-");
+            String ano = parts[0];
+            String mes = parts[1];
+            String dia = parts[2];
+            String fecha = dia + "-" + mes + "-" + ano;
+            String[] filas = new String[10];
+            filas[0] = String.valueOf(rs.getInt("numcliente"));
+            filas[1] = fecha;
+            filas[2] = rs.getString("nombrecliente");
+            filas[3] = rs.getString("documento");
+            filas[4] = rs.getString("segmento");
+            filas[5] = rs.getString("operador");
+            filas[6] = rs.getString("oferta");
+            filas[7] = rs.getString("delegacion");
+            filas[8] = rs.getString("comercial");
+            filas[9] = rs.getString("estado");
+            modelo.addRow(filas);
 
-    public void filtrodocumento(String docu) {
-        try {
-            if (!docu.equalsIgnoreCase("-")) {
-                rs = st.executeQuery("select * from ventas where documento='" + docu + "'");
-                if (rs.next()) {
-                    modelo = crearModelo();
-                    do {
-                        rs.getString("fechacreacion");
-                        String[] parts = rs.getString("fechacreacion").split("-");
-                        String ano = parts[0];
-                        String mes = parts[1];
-                        String dia = parts[2];
-                        String fecha = dia + "-" + mes + "-" + ano;
-                        String[] filas = new String[10];
-                        filas[0] = String.valueOf(rs.getInt("numcliente"));
-                        filas[1] = fecha;
-                        filas[2] = rs.getString("nombrecliente");
-                        filas[3] = rs.getString("documento");
-                        filas[4] = rs.getString("segmento");
-                        filas[5] = rs.getString("operador");
-                        filas[6] = rs.getString("oferta");
-                        filas[7] = rs.getString("delegacion");
-                        filas[8] = rs.getString("comercial");
-                        filas[9] = rs.getString("estado");
-                        modelo.addRow(filas);
-
-                    } while (rs.next());
-                    tablabusqueda.setModel(modelo);
-                } else {
-                    modelo.rowsRemoved(null);
-                    modelo = crearModelo();
-                    tablabusqueda.setModel(modelo);
-                }
-            } else {
-                sinfiltro();
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(InicioSesion.class.getName()).log(Level.SEVERE, null, ex);
-
+          } while (rs.next());
+          tablabusqueda.setModel(modelo);
+        } else {
+          modelo.rowsRemoved(null);
+          modelo = crearModelo();
+          tablabusqueda.setModel(modelo);
         }
+      } else {
+        sinfiltro();
+      }
+    } catch (SQLException ex) {
+      Logger.getLogger(InicioSesion.class.getName()).log(Level.SEVERE, null, ex);
     }
+  }
 
-    public void filtroestado(String docu) {
-        try {
-            if (!combobusquedaestado.getSelectedItem().toString().equalsIgnoreCase("-")) {
-                if (combobusquedacomercial.getSelectedItem().toString().equalsIgnoreCase("-")) {
-                    rs = st.executeQuery("select * from ventas where estado='" + combobusquedaestado.getSelectedItem().toString() + "'");
-                } else {
-                    rs = st.executeQuery("select * from ventas where estado='" + combobusquedaestado.getSelectedItem().toString() + "' and comercial='" + combobusquedacomercial.getSelectedItem().toString() + "'");
+  public void filtrooperador(String operador) {
+    try {
+      if (!operador.equalsIgnoreCase("-")) {
+        rs = st.executeQuery("select * from ventas where operador='" + operador + "'");
+        if (rs.next()) {
+          modelo = crearModelo();
+          do {
+            rs.getString("fechacreacion");
+            String[] parts = rs.getString("fechacreacion").split("-");
+            String ano = parts[0];
+            String mes = parts[1];
+            String dia = parts[2];
+            String fecha = dia + "-" + mes + "-" + ano;
+            String[] filas = new String[10];
+            filas[0] = String.valueOf(rs.getInt("numcliente"));
+            filas[1] = fecha;
+            filas[2] = rs.getString("nombrecliente");
+            filas[3] = rs.getString("documento");
+            filas[4] = rs.getString("segmento");
+            filas[5] = rs.getString("operador");
+            filas[6] = rs.getString("oferta");
+            filas[7] = rs.getString("delegacion");
+            filas[8] = rs.getString("comercial");
+            filas[9] = rs.getString("estado");
+            modelo.addRow(filas);
 
-                }
-                if (rs.next()) {
-                    modelo = crearModelo();
-                    do {
-                        rs.getString("fechacreacion");
-                        String[] parts = rs.getString("fechacreacion").split("-");
-                        String ano = parts[0];
-                        String mes = parts[1];
-                        String dia = parts[2];
-                        String fecha = dia + "-" + mes + "-" + ano;
-                        String[] filas = new String[10];
-                        filas[0] = String.valueOf(rs.getInt("numcliente"));
-                        filas[1] = fecha;
-                        filas[2] = rs.getString("nombrecliente");
-                        filas[3] = rs.getString("documento");
-                        filas[4] = rs.getString("segmento");
-                        filas[5] = rs.getString("operador");
-                        filas[6] = rs.getString("oferta");
-                        filas[7] = rs.getString("delegacion");
-                        filas[8] = rs.getString("comercial");
-                        filas[9] = rs.getString("estado");
-                        modelo.addRow(filas);
-
-                    } while (rs.next());
-                    tablabusqueda.setModel(modelo);
-
-                } else {
-                    modelo.rowsRemoved(null);
-                    modelo = crearModelo();
-                    tablabusqueda.setModel(modelo);
-                }
-            } else {
-                sinfiltro();
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(InicioSesion.class.getName()).log(Level.SEVERE, null, ex);
-
+          } while (rs.next());
+          tablabusqueda.setModel(modelo);
+        } else {
+          modelo.rowsRemoved(null);
+          modelo = crearModelo();
+          tablabusqueda.setModel(modelo);
         }
+      } else {
+        sinfiltro();
+      }
+    } catch (SQLException ex) {
+      Logger.getLogger(InicioSesion.class.getName()).log(Level.SEVERE, null, ex);
     }
+  }
 
-    public void filtrocodigo(String cod) {
-        try {
-            if (!cod.equalsIgnoreCase("-")) {
-                rs = st.executeQuery("select select * from ventas where codcomercial='" + cod + "'");
-                if (rs.next()) {
-                    modelo = crearModelo();
-                    do {
-                        rs.getString("fechacreacion");
-                        String[] parts = rs.getString("fechacreacion").split("-");
-                        String ano = parts[0];
-                        String mes = parts[1];
-                        String dia = parts[2];
-                        String fecha = dia + "-" + mes + "-" + ano;
-                        String[] filas = new String[10];
-                        filas[0] = String.valueOf(rs.getInt("numcliente"));
-                        filas[1] = fecha;
-                        filas[2] = rs.getString("nombrecliente");
-                        filas[3] = rs.getString("documento");
-                        filas[4] = rs.getString("segmento");
-                        filas[5] = rs.getString("operador");
-                        filas[6] = rs.getString("oferta");
-                        filas[7] = rs.getString("delegacion");
-                        filas[8] = rs.getString("comercial");
-                        filas[9] = rs.getString("estado");
-                        modelo.addRow(filas);
-
-                    } while (rs.next());
-                    tablabusqueda.setModel(modelo);
-                } else {
-                    modelo.rowsRemoved(null);
-                    modelo = crearModelo();
-                    tablabusqueda.setModel(modelo);
-                }
-            } else {
-                sinfiltro();
-
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(InicioSesion.class.getName()).log(Level.SEVERE, null, ex);
-
-        }
-    }
-
-    public void filtrocomercial(String comercial) {
-        try {
-            if (!comercial.equalsIgnoreCase("-")) {
-                if (combobusquedaestado.getSelectedItem().toString().equalsIgnoreCase("-")) {
-                    rs = st.executeQuery("select * from ventas where comercial='" + comercial + "'");
-                } else {
-                    rs = st.executeQuery("select * from ventas where estado='" + combobusquedaestado.getSelectedItem().toString() + "' and comercial='" + combobusquedacomercial.getSelectedItem().toString() + "'");
-
-                }
-                if (rs.next()) {
-                    modelo = crearModelo();
-                    do {
-                        rs.getString("fechacreacion");
-                        String[] parts = rs.getString("fechacreacion").split("-");
-                        String ano = parts[0];
-                        String mes = parts[1];
-                        String dia = parts[2];
-                        String fecha = dia + "-" + mes + "-" + ano;
-                        String[] filas = new String[10];
-                        filas[0] = String.valueOf(rs.getInt("numcliente"));
-                        filas[1] = fecha;
-                        filas[2] = rs.getString("nombrecliente");
-                        filas[3] = rs.getString("documento");
-                        filas[4] = rs.getString("segmento");
-                        filas[5] = rs.getString("operador");
-                        filas[6] = rs.getString("oferta");
-                        filas[7] = rs.getString("delegacion");
-                        filas[8] = rs.getString("comercial");
-                        filas[9] = rs.getString("estado");
-                        modelo.addRow(filas);
-
-                    } while (rs.next());
-                    tablabusqueda.setModel(modelo);
-                } else {
-                    modelo.rowsRemoved(null);
-                    modelo = crearModelo();
-                    tablabusqueda.setModel(modelo);
-                }
-            } else {
-                sinfiltro();
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(InicioSesion.class.getName()).log(Level.SEVERE, null, ex);
-
-        }
-    }
-
-    public void filtrooperador(String operador) {
-        try {
-            if (!operador.equalsIgnoreCase("-")) {
-                rs = st.executeQuery("select * from ventas where operador='" + operador + "'");
-                if (rs.next()) {
-                    modelo = crearModelo();
-                    do {
-                        rs.getString("fechacreacion");
-                        String[] parts = rs.getString("fechacreacion").split("-");
-                        String ano = parts[0];
-                        String mes = parts[1];
-                        String dia = parts[2];
-                        String fecha = dia + "-" + mes + "-" + ano;
-                        String[] filas = new String[10];
-                        filas[0] = String.valueOf(rs.getInt("numcliente"));
-                        filas[1] = fecha;
-                        filas[2] = rs.getString("nombrecliente");
-                        filas[3] = rs.getString("documento");
-                        filas[4] = rs.getString("segmento");
-                        filas[5] = rs.getString("operador");
-                        filas[6] = rs.getString("oferta");
-                        filas[7] = rs.getString("delegacion");
-                        filas[8] = rs.getString("comercial");
-                        filas[9] = rs.getString("estado");
-                        modelo.addRow(filas);
-
-                    } while (rs.next());
-                    tablabusqueda.setModel(modelo);
-                } else {
-                    modelo.rowsRemoved(null);
-                    modelo = crearModelo();
-                    tablabusqueda.setModel(modelo);
-                }
-            } else {
-                sinfiltro();
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(InicioSesion.class.getName()).log(Level.SEVERE, null, ex);
-
-        }
-    }
-
-    /**
-     * @param args the command line arguments
+  /** @param args the command line arguments */
+  public static void main(String args[]) {
+    /* Set the Nimbus look and feel */
+    // <editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+    /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+     * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Busqueda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    try {
+      for (javax.swing.UIManager.LookAndFeelInfo info :
+          javax.swing.UIManager.getInstalledLookAndFeels()) {
+        if ("Nimbus".equals(info.getName())) {
+          javax.swing.UIManager.setLookAndFeel(info.getClassName());
+          break;
         }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                Busqueda dialog = new Busqueda(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
+      }
+    } catch (ClassNotFoundException
+        | InstantiationException
+        | IllegalAccessException
+        | javax.swing.UnsupportedLookAndFeelException ex) {
+      java.util.logging.Logger.getLogger(Busqueda.class.getName())
+          .log(java.util.logging.Level.SEVERE, null, ex);
     }
+    // </editor-fold>
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnsalirbus;
-    private javax.swing.JButton btnsinfiltros;
-    private javax.swing.JComboBox combobusoperador;
-    private javax.swing.JComboBox<String> combobusquedacomercial;
-    private javax.swing.JComboBox<String> combobusquedadelegacion;
-    private javax.swing.JComboBox<String> combobusquedaestado;
-    private javax.swing.JComboBox combomes;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tablabusqueda;
-    private javax.swing.JTextField txtbusquedadocumento;
-    private javax.swing.JTextField txtcodcomercial;
-    private javax.swing.JLabel txtcodenvio;
-    // End of variables declaration//GEN-END:variables
+    /* Create and display the dialog */
+    java.awt.EventQueue.invokeLater(
+        new Runnable() {
+          @Override
+          public void run() {
+            Busqueda dialog = new Busqueda(new javax.swing.JFrame(), true);
+            dialog.addWindowListener(
+                new java.awt.event.WindowAdapter() {
+                  @Override
+                  public void windowClosing(java.awt.event.WindowEvent e) {
+                    System.exit(0);
+                  }
+                });
+            dialog.setVisible(true);
+          }
+        });
+  }
+
+  // Variables declaration - do not modify//GEN-BEGIN:variables
+  private javax.swing.JButton btnsalirbus;
+  private javax.swing.JButton btnsinfiltros;
+  private javax.swing.JComboBox combobusoperador;
+  private javax.swing.JComboBox<String> combobusquedacomercial;
+  private javax.swing.JComboBox<String> combobusquedadelegacion;
+  private javax.swing.JComboBox<String> combobusquedaestado;
+  private javax.swing.JComboBox combomes;
+  private javax.swing.JButton jButton1;
+  private javax.swing.JLabel jLabel1;
+  private javax.swing.JLabel jLabel2;
+  private javax.swing.JLabel jLabel3;
+  private javax.swing.JLabel jLabel4;
+  private javax.swing.JLabel jLabel5;
+  private javax.swing.JLabel jLabel6;
+  private javax.swing.JLabel jLabel7;
+  private javax.swing.JScrollPane jScrollPane1;
+  private javax.swing.JTable tablabusqueda;
+  private javax.swing.JTextField txtbusquedadocumento;
+  private javax.swing.JTextField txtcodcomercial;
+  private javax.swing.JLabel txtcodenvio;
+  // End of variables declaration//GEN-END:variables
 }
