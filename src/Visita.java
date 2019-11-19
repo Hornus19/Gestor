@@ -36,7 +36,7 @@ public class Visita extends javax.swing.JDialog {
     txtnuevocomiventa.setEnabled(false);
     try {
       Class.forName(driver).newInstance();
-      con = DriverManager.getConnection(urlMysql + "Clientes", "sencitel", "Ludwig1753");
+      con = DriverManager.getConnection(urlMysql + "sencitel", "sencitel", "Ludwig1753");
       st = con.createStatement();
     } catch (SQLException
         | ClassNotFoundException
@@ -139,10 +139,8 @@ public class Visita extends javax.swing.JDialog {
               "Agente",
               "CT Estado"
             }) {
-          /**
-               * 
-               */
-              private static final long serialVersionUID = 1L;
+
+          private static final long serialVersionUID = 1L;
           Class[] types =
               new Class[] {
                 java.lang.String.class,
@@ -1281,29 +1279,22 @@ public class Visita extends javax.swing.JDialog {
                 javax.swing.GroupLayout.PREFERRED_SIZE));
 
     pack();
-  } // </editor-fold>//GEN-END:initComponents
+  }
 
-  private void btnsalirvisitaActionPerformed(
-      java.awt.event.ActionEvent evt) { // GEN-FIRST:event_btnsalirvisitaActionPerformed
+  private void btnsalirvisitaActionPerformed(java.awt.event.ActionEvent evt) {
     this.setVisible(false);
-  } // GEN-LAST:event_btnsalirvisitaActionPerformed
+  }
 
-  private void txtnuevominActionPerformed(
-      java.awt.event.ActionEvent evt) { // GEN-FIRST:event_txtnuevominActionPerformed
-    // TODO add your handling code here:
-  } // GEN-LAST:event_txtnuevominActionPerformed
+  private void txtnuevominActionPerformed(java.awt.event.ActionEvent evt) { //
+  }
 
-  private void btnnuevovisitaActionPerformed(
-      java.awt.event.ActionEvent evt) { // GEN-FIRST:event_btnnuevovisitaActionPerformed
+  private void btnnuevovisitaActionPerformed(java.awt.event.ActionEvent evt) {
     bloqueonuevo();
-  } // GEN-LAST:event_btnnuevovisitaActionPerformed
+  }
 
-  private void txtnuevotlfFocusLost(
-      java.awt.event.FocusEvent evt) { // GEN-FIRST:event_txtnuevotlfFocusLost
+  private void txtnuevotlfFocusLost(java.awt.event.FocusEvent evt) {
     if (!txtnuevotlf.getText().equalsIgnoreCase("")) {
-      if (validaciones.Validar.tlf(txtnuevotlf.getText()) == 1) {
-        //
-      } else {
+      if (validaciones.Validar.tlf(txtnuevotlf.getText()) != 1) {
         JOptionPane.showMessageDialog(
             null, "El Teléfono no es valido", "Error", JOptionPane.WARNING_MESSAGE);
       }
@@ -1311,10 +1302,10 @@ public class Visita extends javax.swing.JDialog {
       JOptionPane.showMessageDialog(
           null, "El Teléfono no puede estar vacío", "Error", JOptionPane.WARNING_MESSAGE);
     }
-  } // GEN-LAST:event_txtnuevotlfFocusLost
+  } 
 
   private void txtnuevocpFocusLost(
-      java.awt.event.FocusEvent evt) { // GEN-FIRST:event_txtnuevocpFocusLost
+      java.awt.event.FocusEvent evt) {
 
     //        if (!txtnuevocp.getText().equalsIgnoreCase("")) {
     //
@@ -1329,10 +1320,10 @@ public class Visita extends javax.swing.JDialog {
     //            JOptionPane.showMessageDialog(null, "El Código Postal no puede estar vacío",
     // "Error", JOptionPane.WARNING_MESSAGE);
     //        }
-  } // GEN-LAST:event_txtnuevocpFocusLost
+  } 
 
   private void txtnuevocpKeyTyped(
-      java.awt.event.KeyEvent evt) { // GEN-FIRST:event_txtnuevocpKeyTyped
+      java.awt.event.KeyEvent evt) {
     int k = (int) evt.getKeyChar();
     if (k >= 97 && k <= 122 || k >= 65 && k <= 90) {
       evt.setKeyChar((char) KeyEvent.VK_CLEAR);
@@ -1347,10 +1338,10 @@ public class Visita extends javax.swing.JDialog {
     if (k == 10) {
       txtnuevocp.transferFocus();
     }
-  } // GEN-LAST:event_txtnuevocpKeyTyped
+  }
 
   private void btnguardarvisitaActionPerformed(
-      java.awt.event.ActionEvent evt) { // GEN-FIRST:event_btnguardarvisitaActionPerformed
+      java.awt.event.ActionEvent evt) { 
     if (cod == 0) {
       if (!txtnuevors.getText().equalsIgnoreCase("")) {
         if (!txtnuevotlf.getText().equalsIgnoreCase("")) {
@@ -1402,7 +1393,7 @@ public class Visita extends javax.swing.JDialog {
                     String hora = txtnuevohora.getText() + ":" + txtnuevomin.getText();
 
                     st.execute(
-                        "INSERT INTO `visitas` (`distribuidor`, `razonsocial`, `persona`, `telefono`, `direccion`, `fecha`, `codpostal`, `hora`, `estado`"
+                        "INSERT INTO `visita` (`distribuidor`, `razonsocial`, `pcontacto`, `telefono`, `direccion`, `fecha`, `codpostal`, `hora`, `estado`"
                             + ", `venta`, `comisionvisita`, `comisionventa`, `observaciones`, `operador`, `teleoperadora`, `fechafin`) "
                             + "VALUES ('"
                             + combonuevodistri.getSelectedItem().toString()
@@ -1496,7 +1487,7 @@ public class Visita extends javax.swing.JDialog {
                 String hora = txtnuevohora.getText() + ":" + txtnuevomin.getText();
 
                 st.execute(
-                    "INSERT INTO `visitas` (`distribuidor`, `razonsocial`, `persona`, `telefono`, `direccion`, `fecha`, `codpostal`, `hora`, `estado`"
+                    "INSERT INTO `visitas` (`distribuidor`, `razonsocial`, `pcontacto`, `telefono`, `direccion`, `fecha`, `codpostal`, `hora`, `estado`"
                         + ", `venta`, `comisionvisita`, `comisionventa`, `observaciones`, `operador`, `teleoperadora`, `fechafin`) "
                         + "VALUES ('"
                         + combonuevodistri.getSelectedItem().toString()
@@ -1634,7 +1625,7 @@ public class Visita extends javax.swing.JDialog {
                             + txtnuevodia.getText();
                     String hora = txtnuevohora.getText() + ":" + txtnuevomin.getText();
                     st.executeUpdate(
-                        "UPDATE visitas set persona='"
+                        "UPDATE visitas set pcontacto='"
                             + txtnuevopsc.getText()
                             + "',distribuidor='"
                             + combonuevodistri.getSelectedItem().toString()
@@ -1766,7 +1757,7 @@ public class Visita extends javax.swing.JDialog {
                         + txtnuevodia.getText();
                 String hora = txtnuevohora.getText() + ":" + txtnuevomin.getText();
                 st.executeUpdate(
-                    "UPDATE visitas set persona='"
+                    "UPDATE visitas set pcontacto='"
                         + txtnuevopsc.getText()
                         + "',distribuidor='"
                         + combonuevodistri.getSelectedItem().toString()
@@ -1819,17 +1810,18 @@ public class Visita extends javax.swing.JDialog {
             null, "Falta Razón Social", "Error Datos", JOptionPane.ERROR_MESSAGE);
       }
     }
-  } // GEN-LAST:event_btnguardarvisitaActionPerformed
+  } 
 
   private void txtcodvisitaFocusLost(
-      java.awt.event.FocusEvent evt) { // GEN-FIRST:event_txtcodvisitaFocusLost
+      java.awt.event.FocusEvent evt) { 
+    
     // Cargo cliente existente en ficha para su modificación
     if (txtcodvisita.getText().equalsIgnoreCase("")) {
       JOptionPane.showMessageDialog(
           null, "Ponga codigo de visitas", "Error Datos", JOptionPane.ERROR_MESSAGE);
     } else {
       try {
-        rs = st.executeQuery("Select * from visitas where visita='" + txtcodvisita.getText() + "'");
+        rs = st.executeQuery("Select * from visita where visita='" + txtcodvisita.getText() + "'");
         if (rs.next()) {
           switch (rs.getString("distribuidor")) {
             case "-":
@@ -1932,34 +1924,34 @@ public class Visita extends javax.swing.JDialog {
         Logger.getLogger(Visita.class.getName()).log(Level.SEVERE, null, ex);
       }
     }
-  } // GEN-LAST:event_txtcodvisitaFocusLost
-
+  } 
+  
   private void combonuevoventaActionPerformed(
-      java.awt.event.ActionEvent evt) { // GEN-FIRST:event_combonuevoventaActionPerformed
+      java.awt.event.ActionEvent evt) { 
     if (combonuevoventa.getSelectedItem().toString().equalsIgnoreCase("SI")) {
       txtnuevocomiventa.setEnabled(true);
     } else {
       txtnuevocomiventa.setEnabled(false);
     }
-  } // GEN-LAST:event_combonuevoventaActionPerformed
+  } 
 
   private void btnmodifvisitaActionPerformed(
-      java.awt.event.ActionEvent evt) { // GEN-FIRST:event_btnmodifvisitaActionPerformed
+      java.awt.event.ActionEvent evt) { 
     txtcodvisita.setEnabled(true);
     bloqueototal();
-  } // GEN-LAST:event_btnmodifvisitaActionPerformed
-
+  } 
+  
   private void combonuevoestadoActionPerformed(
-      java.awt.event.ActionEvent evt) { // GEN-FIRST:event_combonuevoestadoActionPerformed
+      java.awt.event.ActionEvent evt) { 
     if (combonuevoestado.getSelectedItem().toString().equalsIgnoreCase("OK")) {
       combonuevoventa.setEnabled(true);
     } else {
       combonuevoventa.setEnabled(false);
     }
-  } // GEN-LAST:event_combonuevoestadoActionPerformed
-
+  } 
+  
   private void btnbusactualizarActionPerformed(
-      java.awt.event.ActionEvent evt) { // GEN-FIRST:event_btnbusactualizarActionPerformed
+      java.awt.event.ActionEvent evt) { 
     int a = 0, b = 0, c = 0, d = 0, e = 0;
     if (combobusdistribuidor.getSelectedIndex() != 0) {
       a = 1;
@@ -1990,11 +1982,11 @@ public class Visita extends javax.swing.JDialog {
         try {
           Class.forName(driver).newInstance();
 
-          con = DriverManager.getConnection(urlMysql + "Clientes", "sencitel", "Ludwig1753");
+          con = DriverManager.getConnection(urlMysql + "sencitel", "sencitel", "Ludwig1753");
           st = con.createStatement();
           rs =
               st.executeQuery(
-                  "select * from visitas where distribuidor='"
+                  "select * from visita where distribuidor='"
                       + combobusdistribuidor.getSelectedItem().toString()
                       + "'");
           cargarbusqueda(rs);
@@ -2009,11 +2001,11 @@ public class Visita extends javax.swing.JDialog {
         try {
           Class.forName(driver).newInstance();
 
-          con = DriverManager.getConnection(urlMysql + "Clientes", "sencitel", "Ludwig1753");
+          con = DriverManager.getConnection(urlMysql + "sencitel", "sencitel", "Ludwig1753");
           st = con.createStatement();
           rs =
               st.executeQuery(
-                  "select * from visitas where MONTH(fecha)='"
+                  "select * from visita where MONTH(fecha)='"
                       + combobusmes.getSelectedIndex()
                       + "'");
           cargarbusqueda(rs);
@@ -2028,11 +2020,11 @@ public class Visita extends javax.swing.JDialog {
         try {
           Class.forName(driver).newInstance();
 
-          con = DriverManager.getConnection(urlMysql + "Clientes", "sencitel", "Ludwig1753");
+          con = DriverManager.getConnection(urlMysql + "sencitel", "sencitel", "Ludwig1753");
           st = con.createStatement();
           rs =
               st.executeQuery(
-                  "select * from visitas where estado='"
+                  "select * from visita where estado='"
                       + combobusestado.getSelectedItem().toString()
                       + "'");
           cargarbusqueda(rs);
@@ -2047,10 +2039,10 @@ public class Visita extends javax.swing.JDialog {
         try {
           Class.forName(driver).newInstance();
 
-          con = DriverManager.getConnection(urlMysql + "Clientes", "sencitel", "Ludwig1753");
+          con = DriverManager.getConnection(urlMysql + "sencitel", "sencitel", "Ludwig1753");
           st = con.createStatement();
           rs =
-              st.executeQuery("select * from visitas where codpostal='" + txtbuscp.getText() + "'");
+              st.executeQuery("select * from visita where codpostal='" + txtbuscp.getText() + "'");
           cargarbusqueda(rs);
         } catch (ClassNotFoundException
             | InstantiationException
@@ -2063,11 +2055,11 @@ public class Visita extends javax.swing.JDialog {
         try {
           Class.forName(driver).newInstance();
 
-          con = DriverManager.getConnection(urlMysql + "Clientes", "sencitel", "Ludwig1753");
+          con = DriverManager.getConnection(urlMysql + "sencitel", "sencitel", "Ludwig1753");
           st = con.createStatement();
           rs =
               st.executeQuery(
-                  "select * from visitas where razonsocial='" + txtbusrs.getText() + "'");
+                  "select * from visita where razonsocial='" + txtbusrs.getText() + "'");
           cargarbusqueda(rs);
         } catch (ClassNotFoundException
             | InstantiationException
@@ -2080,11 +2072,11 @@ public class Visita extends javax.swing.JDialog {
         try {
           Class.forName(driver).newInstance();
 
-          con = DriverManager.getConnection(urlMysql + "Clientes", "sencitel", "Ludwig1753");
+          con = DriverManager.getConnection(urlMysql + "sencitel", "sencitel", "Ludwig1753");
           st = con.createStatement();
           rs =
               st.executeQuery(
-                  "select * from visitas where razonsocial='"
+                  "select * from visita where razonsocial='"
                       + txtbusrs.getText()
                       + "' and distribuidor='"
                       + combobusdistribuidor.getSelectedItem().toString()
@@ -2101,11 +2093,11 @@ public class Visita extends javax.swing.JDialog {
         try {
           Class.forName(driver).newInstance();
 
-          con = DriverManager.getConnection(urlMysql + "Clientes", "sencitel", "Ludwig1753");
+          con = DriverManager.getConnection(urlMysql + "sencitel", "sencitel", "Ludwig1753");
           st = con.createStatement();
           rs =
               st.executeQuery(
-                  "select * from visitas where codpostal='"
+                  "select * from visita where codpostal='"
                       + txtbuscp.getText()
                       + "' and distribuidor='"
                       + combobusdistribuidor.getSelectedItem().toString()
@@ -2122,11 +2114,11 @@ public class Visita extends javax.swing.JDialog {
         try {
           Class.forName(driver).newInstance();
 
-          con = DriverManager.getConnection(urlMysql + "Clientes", "sencitel", "Ludwig1753");
+          con = DriverManager.getConnection(urlMysql + "sencitel", "sencitel", "Ludwig1753");
           st = con.createStatement();
           rs =
               st.executeQuery(
-                  "select * from visitas where estado='"
+                  "select * from visita where estado='"
                       + combobusestado.getSelectedItem().toString()
                       + "' and distribuidor='"
                       + combobusdistribuidor.getSelectedItem().toString()
@@ -2143,11 +2135,11 @@ public class Visita extends javax.swing.JDialog {
         try {
           Class.forName(driver).newInstance();
 
-          con = DriverManager.getConnection(urlMysql + "Clientes", "sencitel", "Ludwig1753");
+          con = DriverManager.getConnection(urlMysql + "sencitel", "sencitel", "Ludwig1753");
           st = con.createStatement();
           rs =
               st.executeQuery(
-                  "select * from visitas where MONTH(fecha)='"
+                  "select * from visita where MONTH(fecha)='"
                       + combobusmes.getSelectedIndex()
                       + "' and distribuidor='"
                       + combobusdistribuidor.getSelectedItem().toString()
@@ -2164,11 +2156,11 @@ public class Visita extends javax.swing.JDialog {
         try {
           Class.forName(driver).newInstance();
 
-          con = DriverManager.getConnection(urlMysql + "Clientes", "sencitel", "Ludwig1753");
+          con = DriverManager.getConnection(urlMysql + "sencitel", "sencitel", "Ludwig1753");
           st = con.createStatement();
           rs =
               st.executeQuery(
-                  "select * from visitas where estado='"
+                  "select * from visita where estado='"
                       + combobusestado.getSelectedItem().toString()
                       + "'and MONTH(fecha)='"
                       + combobusmes.getSelectedIndex()
@@ -2187,11 +2179,11 @@ public class Visita extends javax.swing.JDialog {
         try {
           Class.forName(driver).newInstance();
 
-          con = DriverManager.getConnection(urlMysql + "Clientes", "sencitel", "Ludwig1753");
+          con = DriverManager.getConnection(urlMysql + "senctiel", "sencitel", "Ludwig1753");
           st = con.createStatement();
           rs =
               st.executeQuery(
-                  "select * from visitas where codpostal='"
+                  "select * from visita where codpostal='"
                       + txtbuscp.getText()
                       + "' and MONTH(fecha)='"
                       + combobusmes.getSelectedIndex()
@@ -2210,11 +2202,11 @@ public class Visita extends javax.swing.JDialog {
         try {
           Class.forName(driver).newInstance();
 
-          con = DriverManager.getConnection(urlMysql + "Clientes", "sencitel", "Ludwig1753");
+          con = DriverManager.getConnection(urlMysql + "sencitel", "sencitel", "Ludwig1753");
           st = con.createStatement();
           rs =
               st.executeQuery(
-                  "select * from visitas where razonsocial='"
+                  "select * from visita where razonsocial='"
                       + txtbusrs.getText()
                       + "' and MONTH(fecha)='"
                       + combobusmes.getSelectedIndex()
@@ -2232,11 +2224,11 @@ public class Visita extends javax.swing.JDialog {
       case "11110": // busqueda por Ditribuidor, fecha, estado y codigo postal
         try {
           Class.forName(driver).newInstance();
-          con = DriverManager.getConnection(urlMysql + "Clientes", "sencitel", "Ludwig1753");
+          con = DriverManager.getConnection(urlMysql + "sencitel", "sencitel", "Ludwig1753");
           st = con.createStatement();
           rs =
               st.executeQuery(
-                  "select * from visitas where estado='"
+                  "select * from visita where estado='"
                       + combobusestado.getSelectedItem().toString()
                       + "' and codpostal='"
                       + txtbuscp.getText()
@@ -2256,11 +2248,11 @@ public class Visita extends javax.swing.JDialog {
       case "11101": // busqueda por Ditribuidor, fecha, estado y Razon Social
         try {
           Class.forName(driver).newInstance();
-          con = DriverManager.getConnection(urlMysql + "Clientes", "sencitel", "Ludwig1753");
+          con = DriverManager.getConnection(urlMysql + "sencitel", "sencitel", "Ludwig1753");
           st = con.createStatement();
           rs =
               st.executeQuery(
-                  "select * from visitas where estado='"
+                  "select * from visita where estado='"
                       + combobusestado.getSelectedItem().toString()
                       + "'  and razonsocial='"
                       + txtbusrs.getText()
@@ -2280,11 +2272,11 @@ public class Visita extends javax.swing.JDialog {
       case "11111": // busqueda por Todos los campos
         try {
           Class.forName(driver).newInstance();
-          con = DriverManager.getConnection(urlMysql + "Clientes", "sencitel", "Ludwig1753");
+          con = DriverManager.getConnection(urlMysql + "sencitel", "sencitel", "Ludwig1753");
           st = con.createStatement();
           rs =
               st.executeQuery(
-                  "select * from visitas where estado='"
+                  "select * from visita where estado='"
                       + combobusestado.getSelectedItem().toString()
                       + "' and codpostal='"
                       + txtbuscp.getText()
@@ -2306,11 +2298,11 @@ public class Visita extends javax.swing.JDialog {
       case "11011": // busqueda por Ditribuidor, fecha, codigo postal y Razon Social
         try {
           Class.forName(driver).newInstance();
-          con = DriverManager.getConnection(urlMysql + "Clientes", "sencitel", "Ludwig1753");
+          con = DriverManager.getConnection(urlMysql + "sencitel", "sencitel", "Ludwig1753");
           st = con.createStatement();
           rs =
               st.executeQuery(
-                  "select * from visitas where razonsocial='"
+                  "select * from visita where razonsocial='"
                       + txtbusrs.getText()
                       + "' and codpostal='"
                       + txtbuscp.getText()
@@ -2330,11 +2322,11 @@ public class Visita extends javax.swing.JDialog {
       case "10111": // busqueda por Ditribuidor, estado, codigo postal y Razon Social
         try {
           Class.forName(driver).newInstance();
-          con = DriverManager.getConnection(urlMysql + "Clientes", "sencitel", "Ludwig1753");
+          con = DriverManager.getConnection(urlMysql + "sencitel", "sencitel", "Ludwig1753");
           st = con.createStatement();
           rs =
               st.executeQuery(
-                  "select * from visitas where estado='"
+                  "select * from visita where estado='"
                       + combobusestado.getSelectedItem().toString()
                       + "' and codpostal='"
                       + txtbuscp.getText()
@@ -2354,11 +2346,11 @@ public class Visita extends javax.swing.JDialog {
       case "10101": // busqueda por Ditribuidor, estado y Razon Social
         try {
           Class.forName(driver).newInstance();
-          con = DriverManager.getConnection(urlMysql + "Clientes", "sencitel", "Ludwig1753");
+          con = DriverManager.getConnection(urlMysql + "sencitel", "sencitel", "Ludwig1753");
           st = con.createStatement();
           rs =
               st.executeQuery(
-                  "select * from visitas where estado='"
+                  "select * from visita where estado='"
                       + combobusestado.getSelectedItem().toString()
                       + "'  and razonsocial='"
                       + txtbusrs.getText()
@@ -2376,11 +2368,11 @@ public class Visita extends javax.swing.JDialog {
       case "10110": // busqueda por Ditribuidor, estado y cp
         try {
           Class.forName(driver).newInstance();
-          con = DriverManager.getConnection(urlMysql + "Clientes", "sencitel", "Ludwig1753");
+          con = DriverManager.getConnection(urlMysql + "sencitel", "sencitel", "Ludwig1753");
           st = con.createStatement();
           rs =
               st.executeQuery(
-                  "select * from visitas where estado='"
+                  "select * from visita where estado='"
                       + combobusestado.getSelectedItem().toString()
                       + "' and codpostal='"
                       + txtbuscp.getText()
@@ -2398,11 +2390,11 @@ public class Visita extends javax.swing.JDialog {
       case "10011": // busqueda por Ditribuidor, cp y rs
         try {
           Class.forName(driver).newInstance();
-          con = DriverManager.getConnection(urlMysql + "Clientes", "sencitel", "Ludwig1753");
+          con = DriverManager.getConnection(urlMysql + "sencitel", "sencitel", "Ludwig1753");
           st = con.createStatement();
           rs =
               st.executeQuery(
-                  "select * from visitas where codpostal='"
+                  "select * from visita where codpostal='"
                       + txtbuscp.getText()
                       + "' and razonsocial='"
                       + txtbusrs.getText()
@@ -2420,11 +2412,11 @@ public class Visita extends javax.swing.JDialog {
       case "01001": // busqueda por Fecha y rs
         try {
           Class.forName(driver).newInstance();
-          con = DriverManager.getConnection(urlMysql + "Clientes", "sencitel", "Ludwig1753");
+          con = DriverManager.getConnection(urlMysql + "sencitel", "sencitel", "Ludwig1753");
           st = con.createStatement();
           rs =
               st.executeQuery(
-                  "select * from visitas where razonsocial='"
+                  "select * from visita where razonsocial='"
                       + txtbusrs.getText()
                       + "' and MONTH(fecha)='"
                       + combobusmes.getSelectedIndex()
@@ -2440,11 +2432,11 @@ public class Visita extends javax.swing.JDialog {
       case "01010": // busqueda por Fecha y cp
         try {
           Class.forName(driver).newInstance();
-          con = DriverManager.getConnection(urlMysql + "Clientes", "sencitel", "Ludwig1753");
+          con = DriverManager.getConnection(urlMysql + "sencitel", "sencitel", "Ludwig1753");
           st = con.createStatement();
           rs =
               st.executeQuery(
-                  "select * from visitas where codpostal='"
+                  "select * from visita where codpostal='"
                       + txtbuscp.getText()
                       + "'  and MONTH(fecha)='"
                       + combobusmes.getSelectedIndex()
@@ -2460,11 +2452,11 @@ public class Visita extends javax.swing.JDialog {
       case "01011": // busqueda por Fecha, cp y rs
         try {
           Class.forName(driver).newInstance();
-          con = DriverManager.getConnection(urlMysql + "Clientes", "sencitel", "Ludwig1753");
+          con = DriverManager.getConnection(urlMysql + "sencitel", "sencitel", "Ludwig1753");
           st = con.createStatement();
           rs =
               st.executeQuery(
-                  "select * from visitas where codpostal='"
+                  "select * from visita where codpostal='"
                       + txtbuscp.getText()
                       + "' and razonsocial='"
                       + txtbusrs.getText()
@@ -2482,11 +2474,11 @@ public class Visita extends javax.swing.JDialog {
       case "01100": // busqueda por Fecha y estado
         try {
           Class.forName(driver).newInstance();
-          con = DriverManager.getConnection(urlMysql + "Clientes", "sencitel", "Ludwig1753");
+          con = DriverManager.getConnection(urlMysql + "sencitel", "sencitel", "Ludwig1753");
           st = con.createStatement();
           rs =
               st.executeQuery(
-                  "select * from visitas where estado='"
+                  "select * from visita where estado='"
                       + combobusestado.getSelectedItem().toString()
                       + "' and MONTH(fecha)='"
                       + combobusmes.getSelectedIndex()
@@ -2502,11 +2494,11 @@ public class Visita extends javax.swing.JDialog {
       case "01101": // busqueda por Fecha, estado y  rs
         try {
           Class.forName(driver).newInstance();
-          con = DriverManager.getConnection(urlMysql + "Clientes", "sencitel", "Ludwig1753");
+          con = DriverManager.getConnection(urlMysql + "sencitel", "sencitel", "Ludwig1753");
           st = con.createStatement();
           rs =
               st.executeQuery(
-                  "select * from visitas where estado='"
+                  "select * from visita where estado='"
                       + combobusestado.getSelectedItem().toString()
                       + "' and razonsocial='"
                       + txtbusrs.getText()
@@ -2524,11 +2516,11 @@ public class Visita extends javax.swing.JDialog {
       case "01110": // busqueda por Fecha, estado y  cp
         try {
           Class.forName(driver).newInstance();
-          con = DriverManager.getConnection(urlMysql + "Clientes", "sencitel", "Ludwig1753");
+          con = DriverManager.getConnection(urlMysql + "sencitel", "sencitel", "Ludwig1753");
           st = con.createStatement();
           rs =
               st.executeQuery(
-                  "select * from visitas where estado='"
+                  "select * from visita where estado='"
                       + combobusestado.getSelectedItem().toString()
                       + "' and codpostal='"
                       + txtbuscp.getText()
@@ -2546,11 +2538,11 @@ public class Visita extends javax.swing.JDialog {
       case "01111": // busqueda por Fecha, estado,cp y rs
         try {
           Class.forName(driver).newInstance();
-          con = DriverManager.getConnection(urlMysql + "Clientes", "sencitel", "Ludwig1753");
+          con = DriverManager.getConnection(urlMysql + "sencitel", "sencitel", "Ludwig1753");
           st = con.createStatement();
           rs =
               st.executeQuery(
-                  "select * from visitas where estado='"
+                  "select * from visita where estado='"
                       + combobusestado.getSelectedItem().toString()
                       + "' and codpostal='"
                       + txtbuscp.getText()
@@ -2570,11 +2562,11 @@ public class Visita extends javax.swing.JDialog {
       case "00101": // busqueda por Estado y rs
         try {
           Class.forName(driver).newInstance();
-          con = DriverManager.getConnection(urlMysql + "Clientes", "sencitel", "Ludwig1753");
+          con = DriverManager.getConnection(urlMysql + "sencitel", "sencitel", "Ludwig1753");
           st = con.createStatement();
           rs =
               st.executeQuery(
-                  "select * from visitas where estado='"
+                  "select * from visita where estado='"
                       + combobusestado.getSelectedItem().toString()
                       + "' and razonsocial='"
                       + txtbusrs.getText()
@@ -2590,11 +2582,11 @@ public class Visita extends javax.swing.JDialog {
       case "00110": // busqueda por Estado y cp
         try {
           Class.forName(driver).newInstance();
-          con = DriverManager.getConnection(urlMysql + "Clientes", "sencitel", "Ludwig1753");
+          con = DriverManager.getConnection(urlMysql + "sencitel", "sencitel", "Ludwig1753");
           st = con.createStatement();
           rs =
               st.executeQuery(
-                  "select * from visitas where estado='"
+                  "select * from visita where estado='"
                       + combobusestado.getSelectedItem().toString()
                       + "' and codpostal='"
                       + txtbuscp.getText()
@@ -2610,11 +2602,11 @@ public class Visita extends javax.swing.JDialog {
       case "00111": // busqueda por Estado, cp y rs
         try {
           Class.forName(driver).newInstance();
-          con = DriverManager.getConnection(urlMysql + "Clientes", "sencitel", "Ludwig1753");
+          con = DriverManager.getConnection(urlMysql + "sencitel", "sencitel", "Ludwig1753");
           st = con.createStatement();
           rs =
               st.executeQuery(
-                  "select * from visitas where estado='"
+                  "select * from visita where estado='"
                       + combobusestado.getSelectedItem().toString()
                       + "' and codpostal='"
                       + txtbuscp.getText()
@@ -2632,11 +2624,11 @@ public class Visita extends javax.swing.JDialog {
       case "00011": // busqueda por cp y rs
         try {
           Class.forName(driver).newInstance();
-          con = DriverManager.getConnection(urlMysql + "Clientes", "sencitel", "Ludwig1753");
+          con = DriverManager.getConnection(urlMysql + "sencitel", "sencitel", "Ludwig1753");
           st = con.createStatement();
           rs =
               st.executeQuery(
-                  "select * from visitas where codpostal='"
+                  "select * from visita where codpostal='"
                       + txtbuscp.getText()
                       + "' and razonsocial='"
                       + txtbusrs.getText()
@@ -2653,21 +2645,20 @@ public class Visita extends javax.swing.JDialog {
         cargainicial();
         break;
     }
-  } // GEN-LAST:event_btnbusactualizarActionPerformed
+  } 
 
   private void txtcodvisitaActionPerformed(
-      java.awt.event.ActionEvent evt) { // GEN-FIRST:event_txtcodvisitaActionPerformed
-    // TODO add your handling code here:
-  } // GEN-LAST:event_txtcodvisitaActionPerformed
+      java.awt.event.ActionEvent evt) { //
+  } 
 
   private void btnfiltroActionPerformed(
-      java.awt.event.ActionEvent evt) { // GEN-FIRST:event_btnfiltroActionPerformed
+      java.awt.event.ActionEvent evt) { 
     bloqueoinicial();
     limpiar();
-  } // GEN-LAST:event_btnfiltroActionPerformed
+  } 
 
   private void tablavisitasMouseClicked(
-      java.awt.event.MouseEvent evt) { // GEN-FIRST:event_tablavisitasMouseClicked
+      java.awt.event.MouseEvent evt) {
     int mod =
         Integer.parseInt(tablavisitas.getValueAt(tablavisitas.getSelectedRow(), 0).toString());
     txtcodvisita.setText(String.valueOf(mod));
@@ -2681,7 +2672,7 @@ public class Visita extends javax.swing.JDialog {
           null, "Ponga codigo de visitas", "Error Datos", JOptionPane.ERROR_MESSAGE);
     } else {
       try {
-        rs = st.executeQuery("Select * from visitas where visita='" + txtcodvisita.getText() + "'");
+        rs = st.executeQuery("Select * from visita where visita='" + txtcodvisita.getText() + "'");
         if (rs.next()) {
           switch (rs.getString("distribuidor")) {
             case "-":
@@ -2933,9 +2924,9 @@ public class Visita extends javax.swing.JDialog {
   public void cargainicial() {
     try {
       Class.forName(driver).newInstance();
-      con = DriverManager.getConnection(urlMysql + "Clientes", "sencitel", "Ludwig1753");
+      con = DriverManager.getConnection(urlMysql + "sencitel", "sencitel", "Ludwig1753");
       st = con.createStatement();
-      rs = st.executeQuery("select * from visitas");
+      rs = st.executeQuery("select * from visita");
       if (rs.next()) {
         modelo = crearModelo();
         do {
@@ -2946,10 +2937,10 @@ public class Visita extends javax.swing.JDialog {
           String dia = parts[2];
           String fecha = dia + "-" + mes + "-" + ano;
           String[] filas = new String[14];
-          filas[0] = rs.getString("visita");
+          filas[0] = rs.getString("idvisita");
           filas[1] = rs.getString("distribuidor");
           filas[2] = rs.getString("razonsocial");
-          filas[3] = rs.getString("persona");
+          filas[3] = rs.getString("pcontacto");
           filas[4] = rs.getString("telefono");
           filas[5] = rs.getString("direccion");
           filas[6] = rs.getString("codpostal");
@@ -2998,10 +2989,10 @@ public class Visita extends javax.swing.JDialog {
           String dia = parts[2];
           String fecha = dia + "-" + mes + "-" + ano;
           String[] filas = new String[14];
-          filas[0] = rs.getString("visita");
+          filas[0] = rs.getString("idvisita");
           filas[1] = rs.getString("distribuidor");
           filas[2] = rs.getString("razonsocial");
-          filas[3] = rs.getString("persona");
+          filas[3] = rs.getString("pcontacto");
           filas[4] = rs.getString("telefono");
           filas[5] = rs.getString("direccion");
           filas[6] = rs.getString("codpostal");
@@ -3038,11 +3029,7 @@ public class Visita extends javax.swing.JDialog {
 
   /** @param args the command line arguments */
   public static void main(String args[]) {
-    /* Set the Nimbus look and feel */
-    // <editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-    /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-     * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-     */
+   
     try {
       for (javax.swing.UIManager.LookAndFeelInfo info :
           javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -3058,9 +3045,6 @@ public class Visita extends javax.swing.JDialog {
       java.util.logging.Logger.getLogger(Visita.class.getName())
           .log(java.util.logging.Level.SEVERE, null, ex);
     }
-    // </editor-fold>
-
-    /* Create and display the dialog */
     java.awt.EventQueue.invokeLater(
         new Runnable() {
           public void run() {
